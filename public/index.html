@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>
+        灵犀ERP
+    </title>
+    <style>
+        div {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app"></div>
+    <!-- 多标签页保持localStorage -->
+    <script>
+        (function() {
+            //入口，用于触发核心事件
+            if (!sessionStorage.length) {
+                localStorage.setItem('getSession', Date.now());
+            };
+
+            // 该事件是核心
+            window.addEventListener('storage', function(event) {
+                //已有窗口
+                if (event.key == 'getSession') {
+                    localStorage.setItem('setSession', JSON.stringify(sessionStorage));
+                    localStorage.removeItem('setSession');
+
+                }
+                //新开窗口
+                else if (event.key == 'setSession' && !sessionStorage.length) {
+                    let data = JSON.parse(event.newValue);
+                    //赋给这个窗口的sessionStorage
+                    for (let key in data) {
+                        sessionStorage.setItem(key, data[key]);
+                    }
+                }
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
