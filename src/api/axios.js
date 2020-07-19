@@ -29,16 +29,15 @@ axios.interceptors.response.use(
                     // 返回 401 清除token信息并跳转到登录页面
                     Message.error('token过期，将返回登录界面')
                     sessionStorage.clear();
-                    router.replace('/login');
+                    router.replace('/Login');
             }
         }
     }
 
 )
 
-// https: //localhost:44308 Kestra
-// http:  //localhost:63833 IIS
-axios.defaults.baseURL = "http://localhost:63833";
+// http://localhost:56567 Kestra
+axios.defaults.baseURL = "http://localhost:56567/api";
 axios.defaults.withCredentials = true;
 axios.defaults.headers["Content-Type"] = "application/json";
 axios.defaults.headers["Accept"] = "application/json";
