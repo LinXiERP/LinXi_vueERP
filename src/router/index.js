@@ -17,6 +17,7 @@ import {
 Vue.use(VueRouter)
 
 const routes = [{
+<<<<<<< HEAD
     path: "/",
     redirect: "/Login"
   },
@@ -56,6 +57,46 @@ const routes = [{
     component: Login,
     meta: {
       title: "登录页"
+=======
+        path: "/",
+        redirect: "/Login"
+    },
+    {
+        path: '/Home',
+        name: 'Home',
+        component: Home,
+        children: [{
+                path: "/register",
+                name: "Register",
+                component: Register,
+            },
+            {
+                path: "NotFound",
+                name: "NotFound",
+                component: NotFound,
+            },
+            {
+                path: "/customermanage",
+                name: "CustomerManage",
+                component: () =>
+                    import ('../views/CustomerManage.vue'),
+            }
+        ],
+    },
+    //login
+    {
+        path: "/Login",
+        name: "Login",
+        component: Login,
+        meta: {
+            title: "登录页"
+        }
+    },
+    {
+        path: '/Test',
+        name: 'Test',
+        component: Test
+>>>>>>> 934a99146002bbc4e8761fd52b8fcc7f8771dacb
     }
   },
   {
