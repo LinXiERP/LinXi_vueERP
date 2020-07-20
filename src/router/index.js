@@ -21,7 +21,7 @@ const routes = [{
         name: 'Home',
         component: Home,
         children: [{
-                path: "",
+                path: "/register",
                 name: "Register",
                 component: Register,
             },
@@ -29,6 +29,12 @@ const routes = [{
                 path: "NotFound",
                 name: "NotFound",
                 component: NotFound,
+            },
+            {
+                path: "/customermanage",
+                name: "CustomerManage",
+                component: () =>
+                    import ('../views/CustomerManage.vue'),
             }
         ],
     },
