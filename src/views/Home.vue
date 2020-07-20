@@ -38,6 +38,9 @@ export default {
     },
     JoinView2() {
       this.$router.push("/Home");
+    },
+    JoinView3() {
+      this.$router.push("/RolesMenus");
     }
   }
 };
