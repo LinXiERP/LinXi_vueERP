@@ -35,24 +35,11 @@ const routes = [{
                 component: NotFound,
             },
             {
-                path: "/RolesMenus",
+                path: "RolesMenus",
                 name: "RolesMenus",
                 component: RolesMenus,
 
             },
-            {
-                path: "/CommodityInventory",
-                name: "CommodityInventory",
-                component: CommodityInventory,
-
-            },
-            {
-                path: "/customermanage",
-                name: "CustomerManage",
-                component: () =>
-                    import ('../views/CustomerManage.vue'),
-            },
-
         ],
     },
     //login
@@ -68,6 +55,22 @@ const routes = [{
         path: '/Test',
         name: 'Test',
         component: Test
+    },
+    {
+        path: "/CommodityInventory",
+        name: "CommodityInventory",
+        component: CommodityInventory,
+
+    },
+    {
+        path: "/Customermanage",
+        name: "CustomerManage",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "CustomerManageInfo",
+            name: "CustomerManageInfo",
+            component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
+        }]
     }
 ]
 

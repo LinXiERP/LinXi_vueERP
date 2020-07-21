@@ -29,20 +29,7 @@ export default {
     Top,
     Left
   },
-  methods: {
-    goToLogin() {
-      this.$router.push("/Login");
-    },
-    JoinView() {
-      this.$router.push("/Home/NotFound");
-    },
-    JoinView2() {
-      this.$router.push("/Home");
-    },
-    JoinView3() {
-      this.$router.push("/RolesMenus");
-    }
-  }
+  methods: {}
 };
 </script>
 

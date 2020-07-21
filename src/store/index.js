@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         isfirst: 0,
-        isLate: false
+        isLate: false,
+        OpenIndex: []
     },
     mutations: {},
     actions: {},
