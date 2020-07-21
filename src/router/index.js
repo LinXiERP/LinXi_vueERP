@@ -71,6 +71,17 @@ const routes = [{
             name: "CustomerManageInfo",
             component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
         }]
+    },
+    //销售管理->销售单管理
+    {
+        path: "/SaleManagement",
+        name: "SaleManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "SaleOrderManagement",
+            name: "SaleOrderManagement",
+            component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
+        }]
     }
 ]
 
