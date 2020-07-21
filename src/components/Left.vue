@@ -41,10 +41,7 @@
             <span>客户管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item
-              index="3-1"
-              @click="GoPath(`/Customermanage/CustomermanageInfo`)"
-            >客户资料</el-menu-item>
+            <el-menu-item index="3-1" @click="GoPath(`/Customermanage/CustomermanageInfo`)">客户资料</el-menu-item>
             <el-menu-item index="3-2">订单管理</el-menu-item>
             <el-menu-item index="3-3">订单跟踪</el-menu-item>
           </el-menu-item-group>
@@ -68,7 +65,10 @@
             <span>商品库存管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="5-1">库存管理</el-menu-item>
+            <el-menu-item
+              index="5-1"
+              @click="GoPath(`/CommodityInventory/CommodityInventoryInfo`)"
+            >库存管理</el-menu-item>
             <el-menu-item index="5-2">添加入库单</el-menu-item>
             <el-menu-item index="5-3">入库单管理</el-menu-item>
             <el-menu-item index="5-4">添加出库单</el-menu-item>
@@ -96,7 +96,7 @@
           <el-menu-item-group style="text-align:center">
             <!-- <el-menu-item index="7-1">选项1</el-menu-item>
             <el-menu-item index="7-2">选项2</el-menu-item>
-            <el-menu-item index="7-3">销售统计</el-menu-item> -->
+            <el-menu-item index="7-3">销售统计</el-menu-item>-->
           </el-menu-item-group>
         </el-submenu>
 
@@ -150,7 +150,6 @@
             <el-menu-item index="11-4">系统帮助</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-
       </el-menu>
     </el-aside>
   </div>
