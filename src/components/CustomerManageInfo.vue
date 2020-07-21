@@ -17,23 +17,31 @@
             <el-button slot="append" icon="el-icon-search" style="width:150px;"></el-button>
           </el-input>
         </el-row>
-          <el-table
-            :data="CustomerList.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-            style="width: 100%"
-          >
-            <el-table-column prop="id" label="客户编号" width="180"></el-table-column>
-            <el-table-column prop="name" label="客户名称" width="180"></el-table-column>
-            <el-table-column prop="address" label="客户地址"></el-table-column>
-            <el-table-column prop="linkman" label="联系人"></el-table-column>
-            <el-table-column prop="email" label="email"></el-table-column>
-            <el-table-column prop="linktel" label="联系人电话"></el-table-column>
-            <el-table-column label>
-              <template slot-scope="scope">
-              <el-button type="primary" style="width:40%;" @click="EditCustomer(scope.$index, scope.row)">编辑</el-button>
-              <el-button type="primary" style="width:40%;" @click="DeleteCustomer(scope.$index, scope.row)">删除</el-button>
+        <el-table
+          :data="CustomerList.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+          style="width: 100%"
+        >
+          <el-table-column prop="id" label="客户编号" width="180"></el-table-column>
+          <el-table-column prop="name" label="客户名称" width="180"></el-table-column>
+          <el-table-column prop="address" label="客户地址"></el-table-column>
+          <el-table-column prop="linkman" label="联系人"></el-table-column>
+          <el-table-column prop="email" label="email"></el-table-column>
+          <el-table-column prop="linktel" label="联系人电话"></el-table-column>
+          <el-table-column label>
+            <template slot-scope="scope">
+              <el-button
+                type="primary"
+                style="width:40%;"
+                @click="ToEditCustomer(scope.$index, scope.row)"
+              >编辑</el-button>
+              <el-button
+                type="primary"
+                style="width:40%;"
+                @click="DeleteCustomer(scope.$index, scope.row)"
+              >删除</el-button>
             </template>
-            </el-table-column>
-          </el-table>
+          </el-table-column>
+        </el-table>
         <el-row style="text-align:center;">
           <div class="block">
             <el-pagination
@@ -257,91 +265,10 @@ export default {
       select: "",
       CustomerItem: {},
       currentPage: 1, //默认显示第一页
-      pageSize: 8, //默认每页显示10条
+      pageSize: 8, //默认每页显示8条
       totalNum: 0, //总页数
 
-      CustomerList: [
-        {
-          id: "1",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "2",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "3",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "4",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "5",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "6",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "7",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "8",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "9",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        },
-        {
-          id: "10",
-          name: "你爸爸",
-          address: "湖南长沙",
-          linkman: "你爹",
-          email: "123123@qq.com",
-          linktel: "12312312"
-        }
-      ],
+      CustomerList: [],
       SearchCustomer: {
         name: "",
         select: "1"
@@ -349,7 +276,7 @@ export default {
     };
   },
   created() {
-    this.totalNum = this.CustomerList.length;
+    (this.totalNum = this.CustomerList.length), this.SelectAllCustomer();
   },
   methods: {
     handleClick(tab, event) {
@@ -361,9 +288,47 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
     },
-    EditCustomer(index,row) {
-      this.CustomerItem = this.CustomerList[index+(this.currentPage-1)*8];
-      this.activeName="second";
+    ToEditCustomer(index, row) {
+      this.CustomerItem = this.CustomerList[index + (this.currentPage - 1) * 8];
+      this.activeName = "second";
+    },
+    //删除客户
+    DeleteCustomer(index, row) {
+      var th = this;
+      var t = this.CustomerList[index + (th.currentPage - 1) * 8];
+      console.log(t);
+      //请求删除客户的接口
+
+      this.$axios
+        .delete(
+          "http://localhost:56567/api/CustomerManagement/DeleteCustomerInfo?id="+t.id,
+        )
+        .then(function(response) {
+          // alert(response.data.code);
+          if (response.data.code === 400) {
+            th.$message.success("删除成功!");
+            th.CustomerList.splice(index + (th.currentPage - 1) * 8, 1);
+          } else {
+            th.$message.warn("删除失败!");
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    //查询所有客户
+    SelectAllCustomer() {
+      var t = this;
+      this.$axios
+        .get("http://localhost:56567/api/CustomerManagement/GetAllCustomerInfo")
+        .then(function(response) {
+          console.log(response.data);
+          t.totalNum=response.data.length;
+          t.CustomerList = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

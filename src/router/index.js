@@ -6,7 +6,6 @@ import Test from '../views/test.vue'
 import Register from "../views/Register.vue";
 import NotFound from "../views/404.vue";
 import RolesMenus from "../views/RolesMenus.vue";
-import CommodityInventory from "../views/CommodityInventory.vue";
 
 
 import axios from "../api/axios";
@@ -55,12 +54,6 @@ const routes = [{
         path: '/Test',
         name: 'Test',
         component: Test
-    },
-    {
-        path: "/CommodityInventory",
-        name: "CommodityInventory",
-        component: CommodityInventory,
-
     },
     {
         path: "/Customermanage",
