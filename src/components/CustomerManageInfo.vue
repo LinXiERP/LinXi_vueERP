@@ -169,7 +169,7 @@
 
           <el-row>
             <el-col :span="8">
-              <el-form-item label="客户姓名">
+              <el-form-item label="客户姓名"> 
                 <el-input v-model="CustomerItem.name" placeholder="客户姓名"></el-input>
               </el-form-item>
             </el-col>
