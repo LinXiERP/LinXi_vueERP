@@ -2,12 +2,12 @@
   <div id="CommodityInventory">
     <el-row :gutter="20">
       <el-col :span="6">
-        <div class="grid-content bg-purple">商品库存管理</div>
+        <div class="grid-content bg-purple">待入库采购单</div>
       </el-col>
       <el-col :span="12">
         <el-form :inline="true" :model="formInline" class="demo-form-inline">
-          <el-form-item label="商品名称">
-            <el-input v-model="formInline.user" placeholder="商品名称"></el-input>
+          <el-form-item label="供应商/商品名称">
+            <el-input v-model="formInline.user" placeholder="供应商/商品名称"></el-input>
           </el-form-item>
           <el-form-item label="商品类别">
             <el-select v-model="formInline.region" placeholder="商品类别">
@@ -22,9 +22,6 @@
       </el-col>
 
       <el-col :span="3">
-        <span class="grid-content bg-purple btn btn-primary">删除</span>
-      </el-col>
-      <el-col :span="3">
         <span class="grid-content bg-purple btn btn-primary">刷新</span>
       </el-col>
 
@@ -35,15 +32,13 @@
       >
         <el-table-column prop="z" label="编号" width="80" type="selection"></el-table-column>
         <el-table-column prop="date" label="编号" width="180"></el-table-column>
+        <el-table-column prop="date" label="采购单编号" width="180"></el-table-column>
+
         <el-table-column prop="name" label="商品名称" width="180"></el-table-column>
-        <el-table-column prop="price" label="商品单价"></el-table-column>
-        <el-table-column prop="stock" label="库存数量"></el-table-column>
-        <el-table-column prop="address" label="单位"></el-table-column>
-        <el-table-column prop="address" label="供应商"></el-table-column>
-        <el-table-column prop="address" label="类别"></el-table-column>
-        <el-table-column prop="address" label="详细">
-          <a href>查看</a>
-        </el-table-column>
+        <el-table-column prop="price" label="采购数量"></el-table-column>
+        <el-table-column prop="stock" label="采购日期"></el-table-column>
+        <el-table-column prop="address" label="状态"></el-table-column>
+        <el-table-column prop="address" label="入库"></el-table-column>
       </el-table>
 
       <el-row style="text-align:center;">
@@ -61,7 +56,6 @@
     </el-row>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -84,61 +78,7 @@ export default {
         //   operator_id: ""
         // }
 
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
+        
       ],
       multipleSelection: [],
 
@@ -154,18 +94,12 @@ export default {
       }
     };
   },
-  created() {
-    (this.totalNum = this.CommmodityList.length), this.ProductInfo();
-  },
+  
   methods: {
     onSubmit() {
       console.log("submit!");
     },
-    ProductInfo() {
-      this.$axios
-        .get(`http://localhost:56567/api/CommodityInventory/GetPrProductInfo`)
-        .then(res => {});
-    },
+    
     //多选
     handleSelectionChange(val) {
       val.forEach(element => {
@@ -187,7 +121,9 @@ export default {
   },
 
   mounted() {
-    this.ProductInfo();
+   
   }
 };
 </script>
+
+

@@ -69,7 +69,8 @@
               index="5-1"
               @click="GoPath(`/CommodityInventory/CommodityInventoryInfo`)"
             >库存管理</el-menu-item>
-            <el-menu-item index="5-2">添加入库单</el-menu-item>
+
+            <el-menu-item index="5-2" @click="GoPath(`/CommodityInventory/PuOrderInfo`)">添加入库单</el-menu-item>
             <el-menu-item index="5-3">入库单管理</el-menu-item>
             <el-menu-item index="5-4">添加出库单</el-menu-item>
             <el-menu-item index="5-5">出库单管理</el-menu-item>
