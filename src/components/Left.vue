@@ -42,7 +42,7 @@
           </template>
           <el-menu-item-group style="text-align:center">
             <el-menu-item index="3-1" @click="GoPath(`/Customermanage/CustomermanageInfo`)">客户资料</el-menu-item>
-            <el-menu-item index="3-2">订单管理</el-menu-item>
+            <el-menu-item index="3-2" @click="GoPath(`/Customermanage/CustomermanageOrder`)">订单管理</el-menu-item>
             <el-menu-item index="3-3">订单跟踪</el-menu-item>
           </el-menu-item-group>
         </el-submenu>

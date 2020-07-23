@@ -38,65 +38,69 @@ const routes = [{
                 name: "RolesMenus",
                 component: RolesMenus,
 
-      },
-    ],
-  },
-  //login
-  {
-    path: "/Login",
-    name: "Login",
-    component: Login,
-    meta: {
-      title: "登录页"
+            },
+        ],
+    },
+    //login
+    {
+        path: "/Login",
+        name: "Login",
+        component: Login,
+        meta: {
+            title: "登录页"
+        }
+    },
+    {
+        path: '/Test',
+        name: 'Test',
+        component: Test
+    },
+    {
+        path: "/CommodityInventory",
+        name: "CommodityInventory",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "CommodityInventoryInfo",
+            name: "CommodityInventoryInfo",
+            component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
+        }]
+
+    },
+    {
+        path: "/CommodityInventory",
+        name: "CommodityInventory",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "PuOrderInfo",
+            name: "PuOrderInfo",
+            component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
+        }]
+
+    },
+    {
+        path: "/Customermanage",
+        name: "CustomerManage",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "CustomerManageInfo",
+            name: "CustomerManageInfo",
+            component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
+        }, {
+            path: "CustomerManageOrder",
+            name: "CustomerManageOrder",
+            component: resolve => require(['../components/CustomerManageOrder.vue'], resolve)
+        }]
+    },
+    {
+        path: "/SaleManagement",
+        name: "SaleManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "SaleOrderManagement",
+            name: "SaleOrderManagement",
+            component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
+        }]
     }
-  },
-  {
-    path: '/Test',
-    name: 'Test',
-    component: Test
-  },
-  {
-    path: "/CommodityInventory",
-    name: "CommodityInventory",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "CommodityInventoryInfo",
-      name: "CommodityInventoryInfo",
-      component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
-    }]
-
-  },
-  {
-    path: "/CommodityInventory",
-    name: "CommodityInventory",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "PuOrderInfo",
-      name: "PuOrderInfo",
-      component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
-    }]
-
-  },
-  {
-    path: "/Customermanage",
-    name: "CustomerManage",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "CustomerManageInfo",
-      name: "CustomerManageInfo",
-      component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
-    }]
-  },
-  {
-    path: "/SaleManagement",
-    name: "SaleManagement",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "SaleOrderManagement",
-      name: "SaleOrderManagement",
-      component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
-    }]
-  }
 ]
 
 const router = new VueRouter({
