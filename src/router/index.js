@@ -38,46 +38,6 @@ const routes = [{
                 name: "RolesMenus",
                 component: RolesMenus,
 
-<<<<<<< Updated upstream
-            },
-        ],
-    },
-    //login
-    {
-        path: "/Login",
-        name: "Login",
-        component: Login,
-        meta: {
-            title: "登录页"
-        }
-    },
-    {
-        path: '/Test',
-        name: 'Test',
-        component: Test
-    },
-    {
-        path: "/CommodityInventory",
-        name: "CommodityInventory",
-        component: resolve => require(['../views/Home.vue'], resolve),
-        children: [{
-            path: "CommodityInventoryInfo",
-            name: "CommodityInventoryInfo",
-            component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
-        }]
-
-    },
-    {
-        path: "/Customermanage",
-        name: "CustomerManage",
-        component: resolve => require(['../views/Home.vue'], resolve),
-        children: [{
-            path: "CustomerManageInfo",
-            name: "CustomerManageInfo",
-            component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
-        }]
-    }
-=======
       },
     ],
   },
@@ -126,8 +86,17 @@ const routes = [{
       name: "CustomerManageInfo",
       component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
     }]
+  },
+  {
+    path: "/SaleManagement",
+    name: "SaleManagement",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SaleOrderManagement",
+      name: "SaleOrderManagement",
+      component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
+    }]
   }
->>>>>>> Stashed changes
 ]
 
 const router = new VueRouter({

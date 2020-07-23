@@ -83,7 +83,7 @@
             <span>销售管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="6-1">销售单管理</el-menu-item>
+            <el-menu-item index="6-1" @click="GoPath(`/SaleManagement/SaleOrderManagement`)">销售单管理</el-menu-item>
             <el-menu-item index="6-2">待销售订单</el-menu-item>
             <el-menu-item index="6-3">销售统计</el-menu-item>
           </el-menu-item-group>
