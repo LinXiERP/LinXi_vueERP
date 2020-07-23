@@ -76,7 +76,6 @@ const routes = [{
             component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
         }]
 
-<<<<<<< HEAD
     },
     {
         path: "/Customermanage",
@@ -101,50 +100,27 @@ const routes = [{
             name: "SaleOrderManagement",
             component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
         }]
+    },
+    {
+        path: "/StaffManagement",
+        name: "StaffManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "StaffManagementInfo",
+            name: "StaffManagementInfo",
+            component: resolve => require(['../components/StaffManagementInfo.vue'], resolve)
+        }]
+    },
+    {
+        path: "/Notice",
+        name: "Notice",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "Noticeinfo",
+            name: "Noticeinfo",
+            component: resolve => require(['../components/NoticeInfo.vue'], resolve)
+        }]
     }
-=======
-  },
-  {
-    path: "/Customermanage",
-    name: "CustomerManage",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "CustomerManageInfo",
-      name: "CustomerManageInfo",
-      component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
-    }]
-  },
-  {
-    path: "/SaleManagement",
-    name: "SaleManagement",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "SaleOrderManagement",
-      name: "SaleOrderManagement",
-      component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
-    }]
-  },
-  {
-    path: "/StaffManagement",
-    name: "StaffManagement",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "StaffManagementInfo",
-      name: "StaffManagementInfo",
-      component: resolve => require(['../components/StaffManagementInfo.vue'], resolve)
-    }]
-  },
-  {
-    path: "/Notice",
-    name: "Notice",
-    component: resolve => require(['../views/Home.vue'], resolve),
-    children: [{
-      path: "Noticeinfo",
-      name: "Noticeinfo",
-      component: resolve => require(['../components/NoticeInfo.vue'], resolve)
-    }]
-  }
->>>>>>> 242f769688b10448a95c81a637c8e03611a4bf06
 ]
 
 const router = new VueRouter({
