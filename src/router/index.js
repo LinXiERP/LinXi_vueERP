@@ -96,6 +96,26 @@ const routes = [{
       name: "SaleOrderManagement",
       component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
     }]
+  },
+  {
+    path: "/StaffManagement",
+    name: "StaffManagement",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "StaffManagementInfo",
+      name: "StaffManagementInfo",
+      component: resolve => require(['../components/StaffManagementInfo.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Notice",
+    name: "Notice",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "Noticeinfo",
+      name: "Noticeinfo",
+      component: resolve => require(['../components/NoticeInfo.vue'], resolve)
+    }]
   }
 ]
 
