@@ -15,8 +15,8 @@
             <span>企业管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="1-1">企业公告</el-menu-item>
-            <el-menu-item index="1-2">人事管理</el-menu-item>
+            <el-menu-item index="1-1"  @click="GoPath(`/Notice/NoticeInfo`)">企业公告</el-menu-item>
+            <el-menu-item index="1-2"  @click="GoPath(`/StaffManagement/StaffManagementInfo`)">人事管理</el-menu-item>
             <el-menu-item index="1-3">待定薪资</el-menu-item>
             <el-menu-item index="1-4">薪资维护</el-menu-item>
             <el-menu-item index="1-5">薪资管理</el-menu-item>
