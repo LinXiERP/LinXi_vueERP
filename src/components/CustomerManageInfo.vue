@@ -356,7 +356,6 @@ export default {
       currentPage: 1, //默认显示第一页
       pageSize: 8, //默认每页显示8条
       totalNum: 0, //总页数
-
       CustomerList: [],//客户集合
       SearchCustomer: {  //查询客户
         name: "",//要查询的姓名
