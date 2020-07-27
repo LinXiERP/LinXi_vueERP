@@ -27,9 +27,9 @@
                 </el-select>
               </el-form-item>
             </el-col>
-                 <el-col :span="4">
-                      <el-button type="primary" icon="el-icon-search">搜索</el-button>
-                 </el-col>
+            <el-col :span="4">
+              <el-button type="primary" icon="el-icon-search">搜索</el-button>
+            </el-col>
             <el-button
               slot="append"
               icon="el-icon-search"
@@ -44,12 +44,12 @@
           style="width: 100%"
           v-loading="loading"
         >
-          <el-table-column prop="id" label="编号" ></el-table-column>
-          <el-table-column prop="no" label="订单编号" ></el-table-column>
-          <el-table-column prop="customerName" label="下单客户" ></el-table-column>
+          <el-table-column prop="id" label="编号"></el-table-column>
+          <el-table-column prop="no" label="订单编号"></el-table-column>
+          <el-table-column prop="customerName" label="下单客户"></el-table-column>
           <el-table-column prop="productName" label="产品名称"></el-table-column>
-          <el-table-column prop="nums" label="订单数量" ></el-table-column>
-             <el-table-column prop="nums" label="订单金额" ></el-table-column>
+          <el-table-column prop="nums" label="订单数量"></el-table-column>
+          <el-table-column prop="nums" label="订单金额"></el-table-column>
           <el-table-column prop="status" label="状态"></el-table-column>
           <el-table-column label="操作" width="300">
             <template slot-scope="scope">
@@ -389,7 +389,7 @@ export default {
     };
   },
   created() {
-    this.SelectAllCustomerOrder();//默认进来就加载所有的客户
+    this.SelectAllCustomerOrder(); //默认进来就加载所有的客户
   },
   methods: {
     handleClick(tab, event) {
@@ -434,7 +434,7 @@ export default {
             )
             .then(function (response) {
               // alert(response.data.code);
-              if (response.data.code === 400) {
+              if (response.data.code === 200) {
                 th.$message.success("删除成功!");
                 th.CustomerOrderList.splice(
                   index + (th.currentPage - 1) * 8,
@@ -459,7 +459,9 @@ export default {
     SelectAllCustomerOrder() {
       var t = this;
       this.$axios
-        .get("http://localhost:56567/api/CustomerManagement/GetAllCustomerOrder")
+        .get(
+          "http://localhost:56567/api/CustomerManagement/GetAllCustomerOrder"
+        )
         .then(function (response) {
           console.log(response.data);
           t.totalNum = response.data.length; //多少页数据

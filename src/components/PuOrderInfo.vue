@@ -30,7 +30,7 @@
         style="width: 100%"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column prop="z" label="编号" width="80" type="selection"></el-table-column>
+        <el-table-column prop="data" label="编号" width="80" type="selection"></el-table-column>
         <el-table-column prop="date" label="编号" width="180"></el-table-column>
         <el-table-column prop="date" label="采购单编号" width="180"></el-table-column>
 
@@ -38,7 +38,7 @@
         <el-table-column prop="price" label="采购数量"></el-table-column>
         <el-table-column prop="stock" label="采购日期"></el-table-column>
         <el-table-column prop="address" label="状态"></el-table-column>
-        <el-table-column prop="address" label="入库"></el-table-column>
+        <el-table-column prop="address" label="操作"></el-table-column>
       </el-table>
 
       <el-row style="text-align:center;">
@@ -62,7 +62,7 @@ export default {
     return {
       formInline: {
         user: "",
-        region: ""
+        region: "",
       },
       CommmodityList: [
         // {
@@ -77,8 +77,6 @@ export default {
         //   license_no: "",
         //   operator_id: ""
         // }
-
-        
       ],
       multipleSelection: [],
 
@@ -90,19 +88,19 @@ export default {
       totalNum: 0, //总页数
       SearchCustomer: {
         name: "",
-        select: "1"
-      }
+        select: "1",
+      },
     };
   },
-  
+
   methods: {
     onSubmit() {
       console.log("submit!");
     },
-    
+
     //多选
     handleSelectionChange(val) {
-      val.forEach(element => {
+      val.forEach((element) => {
         this.multipleSelection.push(element.date);
       });
       console.log(this.multipleSelection);
@@ -117,12 +115,10 @@ export default {
     ToEditCustomer(index, row) {
       this.CustomerItem = this.CustomerList[index + (this.currentPage - 1) * 8];
       this.activeName = "second";
-    }
+    },
   },
 
-  mounted() {
-   
-  }
+  mounted() {},
 };
 </script>
 
