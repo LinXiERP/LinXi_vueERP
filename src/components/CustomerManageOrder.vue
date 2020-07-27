@@ -1,15 +1,19 @@
 <template>
   <div id="CustomerManageOrder">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card">
       <el-tab-pane label="订单列表" name="first">
         <el-form ref="SearchCustomerOrder" :model="SearchCustomerOrder" label-width="80px">
           <el-row>
             <el-col :span="6">
               <el-form-item label="所有产品">
                 <el-select v-model="SearchCustomerOrder.product" placeholder="请选择产品">
-                  <el-option label="蓝牙耳机" value="手机"></el-option>
-                  <el-option label="区域一" value="蓝牙耳机"></el-option>
-                  <el-option label="区域二" value="空调"></el-option>
+                  <el-option label="所有" value="所有"></el-option>
+                  <el-option
+                    :label="i.productName"
+                    :value="i.productName"
+                    :key="i.id"
+                    v-for="i in products"
+                  ></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
@@ -19,6 +23,7 @@
             <el-col :span="6">
               <el-form-item label="状态">
                 <el-select v-model="SearchCustomerOrder.status">
+                  <el-option label="所有" value="-100"></el-option>
                   <el-option label="待审核" value="0"></el-option>
                   <el-option label="已审核" value="1"></el-option>
                   <el-option label="待发货" value="2"></el-option>
@@ -27,15 +32,15 @@
                 </el-select>
               </el-form-item>
             </el-col>
-                 <el-col :span="4">
-                      <el-button type="primary" icon="el-icon-search">搜索</el-button>
-                 </el-col>
-            <el-button
+            <el-col :span="4">
+              <el-button type="primary" icon="el-icon-search" @click="SelectCustomerOrder">搜索</el-button>
+            </el-col>
+            <!-- <el-button
               slot="append"
               icon="el-icon-search"
               style="width:150px;"
               @click="SelectCustomerOrder"
-            ></el-button>
+            ></el-button>-->
           </el-row>
         </el-form>
 
@@ -44,12 +49,12 @@
           style="width: 100%"
           v-loading="loading"
         >
-          <el-table-column prop="id" label="编号" ></el-table-column>
-          <el-table-column prop="no" label="订单编号" ></el-table-column>
-          <el-table-column prop="customerName" label="下单客户" ></el-table-column>
+          <el-table-column prop="id" label="编号"></el-table-column>
+          <el-table-column prop="no" label="订单编号"></el-table-column>
+          <el-table-column prop="customerName" label="下单客户"></el-table-column>
           <el-table-column prop="productName" label="产品名称"></el-table-column>
-          <el-table-column prop="nums" label="订单数量" ></el-table-column>
-             <el-table-column prop="nums" label="订单金额" ></el-table-column>
+          <el-table-column prop="nums" label="订单数量"></el-table-column>
+          <el-table-column prop="nums" label="订单金额"></el-table-column>
           <el-table-column prop="status" label="状态"></el-table-column>
           <el-table-column label="操作" width="300">
             <template slot-scope="scope">
@@ -269,20 +274,55 @@
               <div
                 class="grid-content bg-purple-dark"
                 style="text-align:center;font-size:25px;margin-bottom:15px;"
-              >添加客户</div>
+              >添加订单</div>
             </el-col>
           </el-row>
 
           <el-row>
             <el-col :span="8">
-              <el-form-item label="客户姓名">
-                <el-input v-model="CustomerOrderItem.name" placeholder="客户姓名"></el-input>
+              <el-form-item label="客户编号">
+                 <el-select
+                  v-model="CustomerOrderItem.product_id"
+                  filterable
+                  allow-create
+                  default-first-option
+                  clearable
+                  placeholder="请选择或输入产品名"
+                  style="width:100%;"
+                >
+                  <el-option
+                    v-for="item in allusers"
+                    :key="item.name"
+                    :label="item.name"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
+                <!-- <el-input v-model="CustomerOrderItem.customer_id" placeholder="客户编号"></el-input> -->
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="邮政编码">
-                <el-input v-model="CustomerOrderItem.postcode" placeholder="邮政编码"></el-input>
+              <el-form-item label="产品编号">
+                <el-select
+                  v-model="CustomerOrderItem.product_id"
+                  filterable
+                  allow-create
+                  default-first-option
+                  clearable
+                  placeholder="请选择或输入产品名"
+                  style="width:100%;"
+                >
+                  <el-option
+                    v-for="item in allproducts"
+                    :key="item.productName"
+                    :label="item.productName"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
+
+                <!-- <el-input v-model="CustomerOrderItem.product_id" placeholder="产品编号"></el-input> -->
               </el-form-item>
             </el-col>
 
@@ -371,30 +411,36 @@
 export default {
   data() {
     return {
+      allproducts:[],//所有产品
+      allusers:[],//所有用户
       activeName: "first",
       select: "",
       CustomerOrderItem: {}, //单个客户
       currentPage: 1, //默认显示第一页
       pageSize: 8, //默认每页显示8条
       totalNum: 0, //总页数
-
+      products: [],
       CustomerOrderList: [], //客户集合
       SearchCustomerOrder: {
         //查询客户订单
         id: "", //订单id
-        product: "", //产品类别
-        status: "", //订单状态
+        product: "所有", //产品类别
+        status: "-100", //订单状态
       },
       loading: false, //表格加载
     };
   },
   created() {
-    this.SelectAllCustomerOrder();//默认进来就加载所有的客户
+    this.SelectAllCustomerOrder(); //默认进来就加载所有的客户
   },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
       this.CustomerOrderItem = {};
+
+      if(tab.name == 'fourth'){
+        	
+        }
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -459,11 +505,14 @@ export default {
     SelectAllCustomerOrder() {
       var t = this;
       this.$axios
-        .get("http://localhost:56567/api/CustomerManagement/GetAllCustomerOrder")
+        .get(
+          "http://localhost:56567/api/CustomerManagement/GetAllCustomerOrder"
+        )
         .then(function (response) {
           console.log(response.data);
           t.totalNum = response.data.length; //多少页数据
           t.CustomerOrderList = response.data; //将客户集合给前端
+          t.products = response.data; //所有的产品
           t.loading = false; //表格加载完成
         })
         .catch(function (error) {
@@ -506,7 +555,7 @@ export default {
             t.$message.success("添加成功！");
             t.CustomerOrderItem = {};
           } else {
-            t.$message.warn("添加失败！");
+            t.$message.error("添加失败！");
             t.CustomerOrderItem = {};
           }
         })
@@ -517,15 +566,28 @@ export default {
     //筛选客户订单
     SelectCustomerOrder() {
       var t = this;
+
+      var url = "";
+      if (t.SearchCustomerOrder.id == "") {
+        url =
+          "http://localhost:56567/api/CustomerManagement/SelectCustomerOrder?id=" +
+          -1 +
+          "&product=" +
+          t.SearchCustomerOrder.product +
+          "&status=" +
+          t.SearchCustomerOrder.status;
+      } else {
+        url =
+          "http://localhost:56567/api/CustomerManagement/SelectCustomerOrder?id=" +
+          t.SearchCustomerOrder.id +
+          "&product=" +
+          t.SearchCustomerOrder.product +
+          "&status=" +
+          t.SearchCustomerOrder.status;
+      }
+
       this.$axios
-        .get(
-          "http://localhost:56567/api/CustomerManagement/SelectCustomerOrder?name=" +
-            t.SearchCustomerOrder.id +
-            "&product=" +
-            t.SearchCustomerOrder.product +
-            "&status=" +
-            t.SearchCustomerOrder.status
-        )
+        .get(url)
         .then(function (response) {
           t.CustomerOrderList = response.data;
           t.$message.success("查询成功");
@@ -533,7 +595,8 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-    },
+    }
+    
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div id="CustomerManage">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
       <el-tab-pane label="用户列表" name="first">
         <el-row>
           <el-input placeholder="请输入内容" v-model="SearchCustomer.name"  class="input-with-select">
@@ -410,7 +410,7 @@ export default {
                 th.$message.success("删除成功!");
                 th.CustomerList.splice(index + (th.currentPage - 1) * 8, 1);
               } else {
-                th.$message.warn("删除失败!");
+                th.$message.error("删除失败!");
               }
             })
             .catch(function(error) {
@@ -452,7 +452,7 @@ export default {
             t.$message.success("更新成功！");
             t.CustomerItem = {};
           } else {
-            t.$message.warn("更新失败！");
+            t.$message.error("更新失败！");
             t.CustomerItem = {};
           }
         })
@@ -473,7 +473,7 @@ export default {
             t.$message.success("添加成功！");
             t.CustomerItem = {};
           } else {
-            t.$message.warn("添加失败！");
+            t.$message.error("添加失败！");
             t.CustomerItem = {};
           }
         })
