@@ -406,7 +406,7 @@ export default {
             )
             .then(function(response) {
               // alert(response.data.code);
-              if (response.data.code === 400) {
+              if (response.data.code === 200) {
                 th.$message.success("删除成功!");
                 th.CustomerList.splice(index + (th.currentPage - 1) * 8, 1);
               } else {
@@ -447,8 +447,8 @@ export default {
           t.CustomerItem
         )
         .then(function(response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+          // console.log(response.data.code == 200);
+          if (response.data.code == 200) {
             t.$message.success("更新成功！");
             t.CustomerItem = {};
           } else {
@@ -468,8 +468,8 @@ export default {
           t.CustomerItem
         )
         .then(function(response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+          console.log(response.data.code == 200);
+          if (response.data.code == 200) {
             t.$message.success("添加成功！");
             t.CustomerItem = {};
           } else {
