@@ -120,6 +120,15 @@ const routes = [{
             name: "Noticeinfo",
             component: resolve => require(['../components/NoticeInfo.vue'], resolve)
         }]
+    }, {
+        path: "/PurchaseManagement",
+        name: "PurchaseManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "PurchaseEdit",
+            name: "PurchaseEdit",
+            component: resolve => require(['../components/Purchasing.vue'], resolve)
+        }]
     }
 ]
 

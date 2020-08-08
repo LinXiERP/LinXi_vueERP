@@ -54,7 +54,7 @@
           </template>
           <el-menu-item-group style="text-align:center">
             <el-menu-item index="4-1">添加采购单</el-menu-item>
-            <el-menu-item index="4-2">采购单管理</el-menu-item>
+            <el-menu-item index="4-2" @click="GoPath(`/PurchaseManagement/PurchaseEdit`)">采购单管理</el-menu-item>
             <el-menu-item index="4-3">采购统计</el-menu-item>
           </el-menu-item-group>
         </el-submenu>

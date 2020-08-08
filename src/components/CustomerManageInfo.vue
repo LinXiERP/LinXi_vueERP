@@ -401,7 +401,7 @@ export default {
         .then(() => {
           this.$axios
             .delete(
-              "http://localhost:56567/api/CustomerManagement/DeleteCustomerInfo?id=" +
+              "/CustomerManagement/DeleteCustomerInfo?id=" +
                 t.id
             )
             .then(function(response) {
@@ -428,7 +428,7 @@ export default {
     SelectAllCustomer() {
       var t = this;
       this.$axios
-        .get("http://localhost:56567/api/CustomerManagement/GetAllCustomerInfo")
+        .get("/CustomerManagement/GetAllCustomerInfo")
         .then(function(response) {
           console.log(response.data);
           t.totalNum = response.data.length;//多少页数据
@@ -443,7 +443,7 @@ export default {
       var t = this;
       this.$axios
         .put(
-          "http://localhost:56567/api/CustomerManagement/UpdateCustomerInfo",
+          "/CustomerManagement/UpdateCustomerInfo",
           t.CustomerItem
         )
         .then(function(response) {
@@ -464,7 +464,7 @@ export default {
       var t = this;
       this.$axios
         .post(
-          "http://localhost:56567/api/CustomerManagement/AddCustomerInfo",
+          "/CustomerManagement/AddCustomerInfo",
           t.CustomerItem
         )
         .then(function(response) {
@@ -486,7 +486,7 @@ export default {
       console.log(t.SearchCustomer.select,t.SearchCustomer.name);
       this.$axios
         .get(
-          "http://localhost:56567/api/CustomerManagement/SelectCustomerInfo?name="+t.SearchCustomer.name+"&select="+t.SearchCustomer.select
+          "/CustomerManagement/SelectCustomerInfo?name="+t.SearchCustomer.name+"&select="+t.SearchCustomer.select
         )
         .then(function(response) {
           t.CustomerList= response.data;

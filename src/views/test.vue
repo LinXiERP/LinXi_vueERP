@@ -1,74 +1,64 @@
 <template>
   <div class="home">
-    <h1>测试专用界面</h1>
-    Template里面必须得包一层div哦，如果有两个同级div就会报错哦
-    <router-view></router-view>
-    <el-row class="row-bg">
-      <el-col :span="12">
-        我是ElementUI的按钮
-        <el-button
-          type="success"
-          @click="goToLogin"
-        >点我去Login</el-button>
-      </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col :span="12">
-        我是BootStrap的按钮
+    <div class="block">
+      <span class="demonstration">直接前往</span>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage3"
+        :page-size="size"
+        layout="prev, pager, next, jumper"
+        :total="count"
+      >
+      </el-pagination>
+      <div class="list-group">
         <button
-          class="btn btn-primary"
-          @click="JoinView"
-        >将404子页面加载至Home
-        </button>
-      </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col :span="12">
-        我是BootStrap的按钮
+          type="button"
+          class="list-group-item list-group-item-action active"
+          @click="totalchanges"
+        >Active item</button>
         <button
-          class="btn btn-primary"
-          @click="JoinView2"
-        >将Register子页面加载至Home
-        </button>
-      </el-col>
-    </el-row>
-
-    <el-row>
-      <el-col :span="12">
-        我是Get请求的按钮
+          type="button"
+          class="list-group-item list-group-item-action"
+        >Item</button>
         <button
-          class="btn btn-primary"
-          @click="GetBtn"
-        >将Register子页面加载至Home
-        </button>
-      </el-col>
-    </el-row>
+          type="button"
+          class="list-group-item list-group-item-action disabled"
+        >Disabled item</button>
+      </div>
+    </div>
   </div>
 </template>
 
 
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "Home",
-  components: {
-    HelloWorld
-  },
+  components: {},
   methods: {
-    goToLogin() {
-      this.$router.push("/Login");
+    async loadinfo() {
+      const { data: res } = await this.$axios.get(
+        "/PurchasingManagement/PurchaseInfo"
+      );
     },
-    JoinView() {
-      this.$router.push("/Home/NotFound");
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
     },
-    JoinView2() {
-      this.$router.push("/Home");
-    }
-  }
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+    totalchanges() {
+      this.count = 200;
+    },
+  },
+  data() {
+    return {
+      currentPage3: 1,
+      size: 15,
+      count: 0,
+    };
+  },
 };
 </script>
 
