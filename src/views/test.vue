@@ -1,69 +1,89 @@
 <template>
-  <div class="home">
-    <div class="block">
-      <span class="demonstration">直接前往</span>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage3"
-        :page-size="size"
-        layout="prev, pager, next, jumper"
-        :total="count"
-      >
-      </el-pagination>
-      <div class="list-group">
-        <button
-          type="button"
-          class="list-group-item list-group-item-action active"
-          @click="totalchanges"
-        >Active item</button>
-        <button
-          type="button"
-          class="list-group-item list-group-item-action"
-        >Item</button>
-        <button
-          type="button"
-          class="list-group-item list-group-item-action disabled"
-        >Disabled item</button>
-      </div>
-    </div>
-  </div>
+  <div id="canvas"></div>
 </template>
-
-
-
 <script>
 export default {
-  name: "Home",
-  components: {},
-  methods: {
-    async loadinfo() {
-      const { data: res } = await this.$axios.get(
-        "/PurchasingManagement/PurchaseInfo"
-      );
-    },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-    totalchanges() {
-      this.count = 200;
-    },
-  },
   data() {
     return {
-      currentPage3: 1,
-      size: 15,
-      count: 0,
+      mockData: [
+        // { year: "1991", value: 3 },
+        // { year: "1992", value: 4 },
+        // { year: "1993", value: 3.5 },
+        // { year: "1994", value: 5 },
+        // { year: "1995", value: 4.9 },
+        // { year: "1996", value: 6 },
+        // { year: "1997", value: 7 },
+        // { year: "1998", value: 9 },
+        // { year: "1999", value: 13 },
+        {
+          type: "家具家电",
+          sales: 38,
+        },
+        {
+          type: "粮油副食",
+          sales: 52,
+        },
+        {
+          type: "生鲜水果",
+          sales: 61,
+        },
+        {
+          type: "美容洗护",
+          sales: 145,
+        },
+        {
+          type: "母婴用品",
+          sales: 48,
+        },
+        {
+          type: "进口食品",
+          sales: 38,
+        },
+        {
+          type: "食品饮料",
+          sales: 38,
+        },
+        {
+          type: "家庭清洁",
+          sales: 38,
+        },
+      ],
     };
+  },
+  mounted() {
+    const linePlot = new this.$G2.Column("canvas", {
+      data: this.mockData,
+      title: {
+        visible: true,
+        text: "基础柱状图-图形标签",
+      },
+      description: {
+        visible: true,
+        text: "基础柱状图图形标签默认位置在柱形上部。",
+      },
+      forceFit: true,
+      padding: "auto",
+      xField: "type",
+      yField: "sales",
+      meta: {
+        type: {
+          alias: "类别",
+        },
+        sales: {
+          alias: "销售额(万)",
+        },
+      },
+      label: {
+        visible: true,
+        style: {
+          fill: "#0D0E68",
+          fontSize: 12,
+          fontWeight: 600,
+          opacity: 0.6,
+        },
+      },
+    });
+    linePlot.render();
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.el-row {
-  margin-bottom: 20px;
-}
-</style>

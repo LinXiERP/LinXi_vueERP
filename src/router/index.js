@@ -128,6 +128,10 @@ const routes = [{
             path: "PurchaseEdit",
             name: "PurchaseEdit",
             component: resolve => require(['../components/Purchasing.vue'], resolve)
+        }, {
+            path: "Statistics",
+            name: "Statistics",
+            component: resolve => require(['../components/PurchasingStatistics.vue'], resolve)
         }]
     }
 ]
@@ -159,5 +163,4 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
-
 export default router

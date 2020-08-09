@@ -4,8 +4,9 @@
       <el-col :span="6">
         <!-- <div class="grid-content bg-purple">待入库采购单</div>-->
       </el-col>
+      <!-- 查询 -->
       <el-col
-        :span="14"
+        :span="15"
         style="float:right"
       >
         <!-- 查询 -->
@@ -107,7 +108,7 @@
               >已结款</span>
               <span
                 class="badge badge-primary"
-                v-if="scope.row.status==5"
+                v-if="scope.row.status==6"
               >已退货</span>
               <span
                 class="badge badge-info"
@@ -115,7 +116,7 @@
               >待入库</span>
               <span
                 class="badge badge-success"
-                v-if="scope.row.status==6"
+                v-if="scope.row.status==5"
               >已入库</span>
             </div>
           </template>
@@ -126,16 +127,17 @@
             <div>
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-primary btn-sm"
                 data-toggle="modal"
                 data-target="#payment"
                 data-whatever="@mdo"
                 v-if="scope.row.status==2"
+                @click="openPayment(scope.$index)"
               >结款</button>
 
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-secondary btn-sm"
                 data-toggle="modal"
                 data-target="#edit"
                 data-whatever="@mdo"
@@ -145,11 +147,12 @@
 
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-danger btn-sm"
                 data-toggle="modal"
                 data-target="#return"
                 data-whatever="@mdo"
                 v-else-if="scope.row.status==1"
+                @click="openReturn(scope.$index)"
               >退货</button>
             </div>
           </template>
@@ -425,7 +428,10 @@
         aria-labelledby="exampleModalLabel2"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div
+          class="modal-dialog"
+          style="max-width: 820px"
+        >
           <div class="modal-content">
             <div class="modal-header">
               <h5
@@ -442,71 +448,210 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
-                <div class="form-group">
-                  <label
-                    for="recipient-name"
-                    class="col-form-label"
-                  >Recipient:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="recipient-name"
-                  >
-                </div>
-                <div class="form-group">
-                  <label
-                    for="message-text"
-                    class="col-form-label"
-                  >Message:</label>
-                  <textarea
-                    class="form-control"
-                    id="message-text"
-                  ></textarea>
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >Close</button>
-              <button
-                type="button"
-                class="btn btn-primary"
-              >Send message</button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- 采购单退货 -->
-      <div
-        class="modal fade"
-        id="return"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel3"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5
-                class="modal-title"
-                id="exampleModalLabel3"
-              >采购单退货</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
+              <div
+                class="form-inline row"
+                style="margin-bottom:20px"
               >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >采购编号：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  v-model="PurchaseEditObj.no"
+                  placeholder="采购编号"
+                  style="margin-right:0px;width:31%"
+                />
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >商品类别：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  v-model="PurchaseEditObj.commodityType"
+                  readonly
+                  placeholder="商品类别"
+                  style="margin-right:20px;width:31%"
+                />
+
+              </div>
+
+              <div
+                class="form-inline row"
+                style="margin-bottom:20px"
+              >
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >商品名称：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  v-model="PurchaseEditObj.name"
+                  placeholder="商品名称"
+                  style="width:31%"
+                />
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >供应商名：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  v-model="PurchaseEditObj.supplierName"
+                  placeholder="供应商名"
+                  style="margin-right:20px;width:31%"
+                />
+              </div>
+
+              <div
+                class="form-inline row"
+                style="margin-bottom:20px"
+              >
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >采购金额：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  placeholder="采购金额"
+                  v-model="PurchaseEditObj.amount"
+                  style="margin-right:20px;width:31%"
+                />
+                <label
+                  class="col-form-label"
+                  style="margin-left:0px"
+                >未付金额：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  placeholder="未付金额"
+                  v-model="noPay"
+                  style="margin-right:50px;width:30%"
+                />
+              </div>
+
+              <div
+                class="form-inline row"
+                style="margin-bottom:20px"
+              >
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >采购日期：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  placeholder="采购日期"
+                  v-model="PurchaseEditObj.purchaseDate"
+                  style="margin-right:20px;width:31%"
+                />
+                <label
+                  class="col-form-label"
+                  style="margin-left:0px"
+                >商品单价：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  placeholder="商品单价"
+                  v-model="PurchaseEditObj.price"
+                  style="margin-right:50px;width:31%"
+                />
+              </div>
+
+              <div
+                class="form-inline row"
+                style="margin-bottom:20px"
+              >
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >采购数量：</label>
+                <input
+                  type="number"
+                  class="form-control-plaintext"
+                  v-model.number="PurchaseEditObj.nums"
+                  placeholder="采购数量"
+                  style="margin-right:20px;width:31%"
+                />
+
+                <label
+                  class="col-form-label"
+                  style="margin-left:0px"
+                >应付金额：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  placeholder="应付金额"
+                  v-model.number="PurchaseEditObj.amountReceivable"
+                  style="margin-right:50px;width:31%"
+                />
+              </div>
+
+              <div
+                class="form-inline row"
+                style="margin-bottom:20px"
+              >
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >结算方式：</label>
+                <select
+                  class="form-control-plaintext"
+                  id="exampleFormControlSelect1"
+                  readonly
+                  display
+                  v-model="PurchaseEditObj.amountWay"
+                  style="width:78%"
+                >
+                  <option value="0">现金</option>
+                  <option value="1">网银</option>
+                  <option value="2">支付宝</option>
+                  <option value="3">微信</option>
+                </select>
+              </div>
+
+              <div
+                class="form-inline row"
+                style="margin-bottom:20px"
+              >
+                <label
+                  class="col-form-label"
+                  style="margin-left:20px"
+                >实付金额：</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="实付金额"
+                  v-model.number="PurchaseEditObj.amountReceived"
+                  style="margin-right:20px;"
+                />
+
+                <label
+                  class="col-form-label"
+                  style="margin-left:0px"
+                >操作人员：</label>
+                <input
+                  type="text"
+                  class="form-control-plaintext"
+                  readonly
+                  v-model="PurchaseEditObj.operatorName"
+                  placeholder="操作人员"
+                  style="margin-right:50px;width:31%"
+                />
+              </div>
 
             </div>
             <div class="modal-footer">
@@ -514,11 +659,12 @@
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
-              >Close</button>
+              >取消</button>
               <button
                 type="button"
                 class="btn btn-primary"
-              >Send message</button>
+                @click="SurePayment"
+              >确认结款</button>
             </div>
           </div>
         </div>
@@ -544,7 +690,7 @@ export default {
       PurchaseEditObj: {},
       activeName: "first",
       currentPage: 1, //默认显示第一页
-      pageSize: 1, //默认每页显示8条
+      pageSize: 15, //默认每页显示8条
       totalNum: 0, //总页数
     };
   },
@@ -569,8 +715,22 @@ export default {
           console.log(that.totalNum);
         });
     },
-    openPayment(index) {},
-    SurePeyment() {},
+    openPayment(index) {
+      this.PurchaseEditObj = JSON.parse(
+        JSON.stringify(this.PurchaseList[index])
+      );
+    },
+    SurePayment() {
+      var that = this;
+      this.$axios
+        .put("/PurchasingManagement/PayMent", this.PurchaseEditObj)
+        .then((res) => {
+          that.$message.success(res.data.msg);
+          $("#payment").modal("hide");
+          that.loadinfo();
+          that.currentPage = 1;
+        });
+    },
     openEdit(index) {
       this.PurchaseEditObj = JSON.parse(
         JSON.stringify(this.PurchaseList[index])
@@ -584,10 +744,37 @@ export default {
           that.$message.success(res.data.msg);
           $("#edit").modal("hide");
           that.loadinfo();
+          that.currentPage = 1;
         });
     },
-    openReturn(index) {},
-    SureReturn() {},
+    openReturn(index) {
+      var that = this;
+
+      this.$confirm("", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+        dangerouslyUseHTMLString: true,
+        message: "<h6><i>此操作将退货, 是否继续 ?</i></h6>",
+      })
+        .then(() => {
+          this.PurchaseEditObj = JSON.parse(
+            JSON.stringify(this.PurchaseList[index])
+          );
+          console.log(2);
+          this.$axios
+            .put("/PurchasingManagement/ReturnBack", this.PurchaseEditObj)
+            .then((res) => {
+              that.loadinfo();
+              that.currentPage = 1;
+              that.$message({
+                type: "success",
+                message: "退货成功!",
+              });
+            });
+        })
+        .catch(() => {});
+    },
 
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
