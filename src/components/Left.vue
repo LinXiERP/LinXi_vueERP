@@ -65,7 +65,9 @@
             <span>采购管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="4-1">添加采购单</el-menu-item>
+            <el-menu-item index="4-1"
+                 @click="GoPath(`/PurchaseManagement/Create`)
+            >添加采购单</el-menu-item>
             <el-menu-item
               index="4-2"
               @click="GoPath(`/PurchaseManagement/PurchaseEdit`)"
