@@ -1,6 +1,6 @@
 <template>
   <div id="CustomerManage">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName" @tab-click="handleClick" type="card">
       <el-tab-pane label="用户列表" name="first">
         <el-row>
           <el-input placeholder="请输入内容" v-model="SearchCustomer.name"  class="input-with-select">
@@ -356,7 +356,6 @@ export default {
       currentPage: 1, //默认显示第一页
       pageSize: 8, //默认每页显示8条
       totalNum: 0, //总页数
-
       CustomerList: [],//客户集合
       SearchCustomer: {  //查询客户
         name: "",//要查询的姓名
@@ -402,16 +401,16 @@ export default {
         .then(() => {
           this.$axios
             .delete(
-              "http://localhost:56567/api/CustomerManagement/DeleteCustomerInfo?id=" +
+              "/CustomerManagement/DeleteCustomerInfo?id=" +
                 t.id
             )
             .then(function(response) {
               // alert(response.data.code);
-              if (response.data.code === 400) {
+              if (response.data.code === 200) {
                 th.$message.success("删除成功!");
                 th.CustomerList.splice(index + (th.currentPage - 1) * 8, 1);
               } else {
-                th.$message.warn("删除失败!");
+                th.$message.error("删除失败!");
               }
             })
             .catch(function(error) {
@@ -429,7 +428,7 @@ export default {
     SelectAllCustomer() {
       var t = this;
       this.$axios
-        .get("http://localhost:56567/api/CustomerManagement/GetAllCustomerInfo")
+        .get("/CustomerManagement/GetAllCustomerInfo")
         .then(function(response) {
           console.log(response.data);
           t.totalNum = response.data.length;//多少页数据
@@ -444,16 +443,16 @@ export default {
       var t = this;
       this.$axios
         .put(
-          "http://localhost:56567/api/CustomerManagement/UpdateCustomerInfo",
+          "/CustomerManagement/UpdateCustomerInfo",
           t.CustomerItem
         )
         .then(function(response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+          // console.log(response.data.code == 200);
+          if (response.data.code == 200) {
             t.$message.success("更新成功！");
             t.CustomerItem = {};
           } else {
-            t.$message.warn("更新失败！");
+            t.$message.error("更新失败！");
             t.CustomerItem = {};
           }
         })
@@ -465,16 +464,16 @@ export default {
       var t = this;
       this.$axios
         .post(
-          "http://localhost:56567/api/CustomerManagement/AddCustomerInfo",
+          "/CustomerManagement/AddCustomerInfo",
           t.CustomerItem
         )
         .then(function(response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+          console.log(response.data.code == 200);
+          if (response.data.code == 200) {
             t.$message.success("添加成功！");
             t.CustomerItem = {};
           } else {
-            t.$message.warn("添加失败！");
+            t.$message.error("添加失败！");
             t.CustomerItem = {};
           }
         })
@@ -487,7 +486,7 @@ export default {
       console.log(t.SearchCustomer.select,t.SearchCustomer.name);
       this.$axios
         .get(
-          "http://localhost:56567/api/CustomerManagement/SelectCustomerInfo?name="+t.SearchCustomer.name+"&select="+t.SearchCustomer.select
+          "/CustomerManagement/SelectCustomerInfo?name="+t.SearchCustomer.name+"&select="+t.SearchCustomer.select
         )
         .then(function(response) {
           t.CustomerList= response.data;

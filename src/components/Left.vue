@@ -15,8 +15,14 @@
             <span>企业管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="1-1"  @click="GoPath(`/Notice/NoticeInfo`)">企业公告</el-menu-item>
-            <el-menu-item index="1-2"  @click="GoPath(`/StaffManagement/StaffManagementInfo`)">人事管理</el-menu-item>
+            <el-menu-item
+              index="1-1"
+              @click="GoPath(`/Notice/NoticeInfo`)"
+            >企业公告</el-menu-item>
+            <el-menu-item
+              index="1-2"
+              @click="GoPath(`/StaffManagement/StaffManagementInfo`)"
+            >人事管理</el-menu-item>
             <el-menu-item index="1-3">待定薪资</el-menu-item>
             <el-menu-item index="1-4">薪资维护</el-menu-item>
             <el-menu-item index="1-5">薪资管理</el-menu-item>
@@ -29,9 +35,9 @@
             <span>生产管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="2-1">计划管理</el-menu-item>
-            <el-menu-item index="2-2">领料管理</el-menu-item>
-            <el-menu-item index="2-3">产品生产</el-menu-item>
+            <el-menu-item index="2-1" @click="GoPath(`/ProductionManagement/ProductionPlanManagement`)">计划管理</el-menu-item>
+            <el-menu-item index="2-2" @click="GoPath(`/ProductionManagement/ProductionPickingManagement`)">领料管理</el-menu-item>
+            <el-menu-item index="2-3" @click="GoPath(`/ProductionManagement/ProductionProductManagement`)">产品生产</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
@@ -41,8 +47,14 @@
             <span>客户管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="3-1" @click="GoPath(`/Customermanage/CustomermanageInfo`)">客户资料</el-menu-item>
-            <el-menu-item index="3-2">订单管理</el-menu-item>
+            <el-menu-item
+              index="3-1"
+              @click="GoPath(`/Customermanage/CustomermanageInfo`)"
+            >客户资料</el-menu-item>
+            <el-menu-item
+              index="3-2"
+              @click="GoPath(`/Customermanage/CustomermanageOrder`)"
+            >订单管理</el-menu-item>
             <el-menu-item index="3-3">订单跟踪</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
@@ -53,9 +65,17 @@
             <span>采购管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="4-1">添加采购单</el-menu-item>
-            <el-menu-item index="4-2">采购单管理</el-menu-item>
-            <el-menu-item index="4-3">采购统计</el-menu-item>
+            <el-menu-item index="4-1"
+                 @click="GoPath(`/PurchaseManagement/Create`)
+            >添加采购单</el-menu-item>
+            <el-menu-item
+              index="4-2"
+              @click="GoPath(`/PurchaseManagement/PurchaseEdit`)"
+            >采购单管理</el-menu-item>
+            <el-menu-item
+              index="4-3"
+              @click="GoPath(`/PurchaseManagement/Statistics`)"
+            >采购统计</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
@@ -70,7 +90,10 @@
               @click="GoPath(`/CommodityInventory/CommodityInventoryInfo`)"
             >库存管理</el-menu-item>
 
-            <el-menu-item index="5-2" @click="GoPath(`/CommodityInventory/PuOrderInfo`)">添加入库单</el-menu-item>
+            <el-menu-item
+              index="5-2"
+              @click="GoPath(`/CommodityInventory/PuOrderInfo`)"
+            >添加入库单</el-menu-item>
             <el-menu-item index="5-3">入库单管理</el-menu-item>
             <el-menu-item index="5-4">添加出库单</el-menu-item>
             <el-menu-item index="5-5">出库单管理</el-menu-item>
@@ -83,7 +106,10 @@
             <span>销售管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="6-1" @click="GoPath(`/SaleManagement/SaleOrderManagement`)">销售单管理</el-menu-item>
+            <el-menu-item
+              index="6-1"
+              @click="GoPath(`/SaleManagement/SaleOrderManagement`)"
+            >销售单管理</el-menu-item>
             <el-menu-item index="6-2">待销售订单</el-menu-item>
             <el-menu-item index="6-3">销售统计</el-menu-item>
           </el-menu-item-group>
@@ -161,14 +187,14 @@ export default {
   name: "Left",
   data() {
     return {
-      array: [1, 2]
+      array: [1, 2],
     };
   },
   methods: {
     GoPath(url) {
       this.$router.push(url);
-    }
-  }
+    },
+  },
 };
 </script>
 
