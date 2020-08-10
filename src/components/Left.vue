@@ -35,9 +35,9 @@
             <span>生产管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="2-1">计划管理</el-menu-item>
-            <el-menu-item index="2-2">领料管理</el-menu-item>
-            <el-menu-item index="2-3">产品生产</el-menu-item>
+            <el-menu-item index="2-1" @click="GoPath(`/ProductionManagement/ProductionPlanManagement`)">计划管理</el-menu-item>
+            <el-menu-item index="2-2" @click="GoPath(`/ProductionManagement/ProductionPickingManagement`)">领料管理</el-menu-item>
+            <el-menu-item index="2-3" @click="GoPath(`/ProductionManagement/ProductionProductManagement`)">产品生产</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 

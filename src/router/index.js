@@ -133,9 +133,25 @@ const routes = [{
             name: "Statistics",
             component: resolve => require(['../components/PurchasingStatistics.vue'], resolve)
         }]
+    },{
+        path: "/ProductionManagement",
+        name: "ProductionManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "ProductionPlanManagement",
+            name: "ProductionPlanManagement",
+            component: resolve => require(['../components/ProductionPlanManagement.vue'], resolve)
+        },{
+            path: "ProductionPickingManagement",
+            name: "ProductionPickingManagement",
+            component: resolve => require(['../components/ProductionPickingManagement.vue'], resolve)
+        },{
+            path: "ProductionProductManagement",
+            name: "ProductionProductManagement",
+            component: resolve => require(['../components/ProductionProductManagement.vue'], resolve)
+        }]
     }
 ]
-
 const router = new VueRouter({
     routes,
     mode: "history" //去掉路由中的#号
