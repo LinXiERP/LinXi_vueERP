@@ -76,6 +76,7 @@ const routes = [{
             component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
         }]
 
+<<<<<<< Updated upstream
     },
     {
         path: "/Customermanage",
@@ -151,6 +152,79 @@ const routes = [{
             component: resolve => require(['../components/ProductionProductManagement.vue'], resolve)
         }]
     }
+=======
+  },
+  {
+    path: "/Customermanage",
+    name: "CustomerManage",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "CustomerManageInfo",
+      name: "CustomerManageInfo",
+      component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
+    }]
+  },
+  {
+    path: "/SaleManagement",
+    name: "SaleManagement",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SaleOrderManagement",
+      name: "SaleOrderManagement",
+      component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
+    }]
+  },
+  {
+    path: "/StaffManagement",
+    name: "StaffManagement",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "StaffManagementInfo",
+      name: "StaffManagementInfo",
+      component: resolve => require(['../components/StaffManagementInfo.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Notice",
+    name: "Notice",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "Noticeinfo",
+      name: "Noticeinfo",
+      component: resolve => require(['../components/NoticeInfo.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Salary",
+    name: "Salary",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SalaryManagementWait",
+      name: "SalaryManagementWait",
+      component: resolve => require(['../components/SalaryManagementWait.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Salary",
+    name: "Salary",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SalaryManagmentDefend",
+      name: "SalaryManagmentDefend",
+      component: resolve => require(['../components/SalaryManagmentDefend.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Salary",
+    name: "Salary",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SalaryManagmentReport",
+      name: "SalaryManagmentReport",
+      component: resolve => require(['../components/SalaryManagmentReport.vue'], resolve)
+    }]
+  }
+>>>>>>> Stashed changes
 ]
 const router = new VueRouter({
     routes,
