@@ -63,7 +63,7 @@
               index="3-2"
               @click="GoPath(`/Customermanage/CustomermanageOrder`)"
             >订单管理</el-menu-item>
-            <el-menu-item index="3-3">订单跟踪</el-menu-item>
+            <el-menu-item index="3-3" @click="GoPath('/Customermanage/CustomerManageOrderTrace')">订单跟踪</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
