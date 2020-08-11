@@ -63,14 +63,7 @@ const routes = [{
             path: "CommodityInventoryInfo",
             name: "CommodityInventoryInfo",
             component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
-        }]
-
-    },
-    {
-        path: "/CommodityInventory",
-        name: "CommodityInventory",
-        component: resolve => require(['../views/Home.vue'], resolve),
-        children: [{
+        }, {
             path: "PuOrderInfo",
             name: "PuOrderInfo",
             component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
@@ -132,29 +125,17 @@ const routes = [{
         name: "Salary",
         component: resolve => require(['../views/Home.vue'], resolve),
         children: [{
-            path: "SalaryManagementWait",
-            name: "SalaryManagementWait",
-            component: resolve => require(['../components/SalaryManagementWait.vue'], resolve)
-        }]
-    },
-    {
-        path: "/Salary",
-        name: "Salary",
-        component: resolve => require(['../views/Home.vue'], resolve),
-        children: [{
             path: "SalaryManagmentDefend",
             name: "SalaryManagmentDefend",
             component: resolve => require(['../components/SalaryManagmentDefend.vue'], resolve)
-        }]
-    },
-    {
-        path: "/Salary",
-        name: "Salary",
-        component: resolve => require(['../views/Home.vue'], resolve),
-        children: [{
+        }, {
             path: "SalaryManagmentReport",
             name: "SalaryManagmentReport",
             component: resolve => require(['../components/SalaryManagmentReport.vue'], resolve)
+        }, {
+            path: "SalaryManagementWait",
+            name: "SalaryManagementWait",
+            component: resolve => require(['../components/SalaryManagementWait.vue'], resolve)
         }]
     }
 ]
