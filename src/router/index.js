@@ -101,6 +101,28 @@ const routes = [{
         }]
     },
     {
+        path: "/QualityManagement",
+        name: "QualityManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "QualityProduct",
+            name: "QualityProduct",
+            component: resolve => require(['../components/QualityProduct.vue'], resolve)
+        },{
+            path: "ProductInfo",
+            name: "ProductInfo",
+            component: resolve => require(['../components/ProductInfo.vue'], resolve)
+        },{
+            path: "QualityCommodity",
+            name: "QualityCommodity",
+            component: resolve => require(['../components/QualityCommodity.vue'], resolve)
+        },{
+            path: "CommodityInfo",
+            name: "CommodityInfo",
+            component: resolve => require(['../components/CommodityInfo.vue'], resolve)
+        }]
+    },
+    {
         path: "/StaffManagement",
         name: "StaffManagement",
         component: resolve => require(['../views/Home.vue'], resolve),
