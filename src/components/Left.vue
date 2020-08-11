@@ -35,9 +35,18 @@
             <span>生产管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="2-1" @click="GoPath(`/ProductionManagement/ProductionPlanManagement`)">计划管理</el-menu-item>
-            <el-menu-item index="2-2" @click="GoPath(`/ProductionManagement/ProductionPickingManagement`)">领料管理</el-menu-item>
-            <el-menu-item index="2-3" @click="GoPath(`/ProductionManagement/ProductionProductManagement`)">产品生产</el-menu-item>
+            <el-menu-item
+              index="2-1"
+              @click="GoPath(`/ProductionManagement/ProductionPlanManagement`)"
+            >计划管理</el-menu-item>
+            <el-menu-item
+              index="2-2"
+              @click="GoPath(`/ProductionManagement/ProductionPickingManagement`)"
+            >领料管理</el-menu-item>
+            <el-menu-item
+              index="2-3"
+              @click="GoPath(`/ProductionManagement/ProductionProductManagement`)"
+            >产品生产</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
@@ -65,11 +74,13 @@
             <span>采购管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="4-1"
-                 @click="GoPath(`/PurchaseManagement/Create`)
+            <el-menu-item
+              index="4-1"
+              @click="GoPath(`/PurchaseManagement/Create`)"
             >添加采购单</el-menu-item>
             <el-menu-item
-              index="4-2"
+              index="
+              4-2"
               @click="GoPath(`/PurchaseManagement/PurchaseEdit`)"
             >采购单管理</el-menu-item>
             <el-menu-item
