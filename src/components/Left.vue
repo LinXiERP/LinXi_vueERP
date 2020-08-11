@@ -154,10 +154,10 @@
             <span>质量管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="9-1">待检商品</el-menu-item>
-            <el-menu-item index="9-2">商品质检单</el-menu-item>
-            <el-menu-item index="9-3">待检产品</el-menu-item>
-            <el-menu-item index="9-4">产品质检单</el-menu-item>
+            <el-menu-item index="9-1" @click="GoPath(`/QualityManagement/QualityCommodity`)">待检商品</el-menu-item>
+            <el-menu-item index="9-2" @click="GoPath(`/QualityManagement/CommodityInfo`)">商品质检单</el-menu-item>
+            <el-menu-item index="9-3" @click="GoPath(`/QualityManagement/QualityProduct`)">待检产品</el-menu-item>
+            <el-menu-item index="9-4" @click="GoPath(`/QualityManagement/ProductInfo`)">产品质检单</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
