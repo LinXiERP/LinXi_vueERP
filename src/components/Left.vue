@@ -15,7 +15,6 @@
             <span>企业管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-<<<<<<< Updated upstream
             <el-menu-item
               index="1-1"
               @click="GoPath(`/Notice/NoticeInfo`)"
@@ -27,13 +26,11 @@
             <el-menu-item index="1-3">待定薪资</el-menu-item>
             <el-menu-item index="1-4">薪资维护</el-menu-item>
             <el-menu-item index="1-5">薪资管理</el-menu-item>
-=======
             <el-menu-item index="1-1"  @click="GoPath(`/Notice/NoticeInfo`)">企业公告</el-menu-item>
             <el-menu-item index="1-2"  @click="GoPath(`/StaffManagement/StaffManagementInfo`)">人事管理</el-menu-item>
             <el-menu-item index="1-3"  @click="GoPath(`/Salary/SalaryManagementWait`)">待定薪资</el-menu-item>
             <el-menu-item index="1-4"  @click="GoPath(`/Salary/SalaryManagmentDefend`)">薪资维护</el-menu-item>
             <el-menu-item index="1-5" @click="GoPath(`/Salary/SalaryManagmentReport`)">薪资报表</el-menu-item>
->>>>>>> Stashed changes
           </el-menu-item-group>
         </el-submenu>
 
@@ -73,8 +70,9 @@
             <span>采购管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="4-1"
-                 @click="GoPath(`/PurchaseManagement/Create`)
+            <el-menu-item
+              index="4-1"
+              @click="GoPath(`/PurchaseManagement/Create`)"
             >添加采购单</el-menu-item>
             <el-menu-item
               index="4-2"

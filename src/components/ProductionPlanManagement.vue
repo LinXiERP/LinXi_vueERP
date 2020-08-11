@@ -37,182 +37,171 @@
           <el-button type="primary" @click="onSelect" icon="el-icon-search">查询</el-button>
         </el-form-item>
 
-        <el-form-item class>
+        <el-form-item>
           <el-button
             type="primary"
-            @click="dialogVisible = true"
+            @click="dialogFormVisible = true;getselectlist()"
             icon="el-icon-circle-plus-outline"
           >添加</el-button>
-          <el-dialog
-            title="添加待质检产品"
-            :visible.sync="dialogVisible"
-            width="50%"
-            :before-close="handleClose"
-          >
-            <el-form
-              :model="ruleForm"
-              :rules="rules"
-              ref="ruleForm"
-              label-width="100px"
-              class="demo-ruleForm"
-            >
-              <el-form-item label="生产单号" prop="no">
-                <el-input v-model="ruleForm.no" style="width:110%"></el-input>
-              </el-form-item>
+          <el-dialog title="添加生产计划" :visible.sync="dialogFormVisible" width="40%">
+            <el-form :model="addform" :rules="rules" ref="addform">
+              <el-row>
+                <el-form-item
+                  label="计划编号"
+                  :label-width="formLabelWidth"
+                  prop="id"
+                  style="padding-bottom:20px;"
+                >
+                  <el-input
+                    onkeyup="this.value = this.value.replace(/[^\d]/g,'');"
+                    placeholder="计划编号"
+                    v-model="addform.id"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                  ></el-input>
+                </el-form-item>
+              </el-row>
 
-              <el-form-item label="产品名称" prop="Productid">
-                <el-select v-model="ruleForm.Productid" placeholder="请选择产品名称" style="width:100%">
-                  <el-option
-                    v-for="item in allproducts"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.id"
-                  ></el-option>
-                </el-select>
-              </el-form-item>
-              <br />
-              <br />
+              <el-row>
+                <el-form-item
+                  label="订单编号"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                >
+                  <el-select
+                    v-model="addform.no"
+                    placeholder="选择订单编号"
+                    style="width:400px;margin-left:-70px"
+                  >
+                    <el-option label="订单外" value></el-option>
+                    <el-option
+                      v-for="(item,index) in slorder"
+                      :key="index"
+                      :label="item.id"
+                      :value="item.id"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+              </el-row>
 
-              <el-form-item label="部门名称" prop="departmentid">
-                <el-select v-model="ruleForm.departmentid" placeholder="请选择部门名称">
-                  <el-option
-                    v-for="item in alldepart"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.id"
-                  ></el-option>
-                </el-select>
-              </el-form-item>
+              <el-row>
+                <el-form-item
+                  label="产品名称"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="productId"
+                >
+                  <el-select
+                    v-model="addform.productId"
+                    placeholder="选择产品名称"
+                    style="width:400px;margin-left:-70px"
+                  >
+                    <el-option
+                      v-for="(item,index) in products"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.id"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+              </el-row>
 
-              <el-form-item label="质检单编号" prop="qmid" style="margin-left:-16px;">
-                <el-input v-model="ruleForm.qmid" style="width:110%"></el-input>
-              </el-form-item>
-              <br />
-              <br />
+              <el-row>
+                <el-form-item
+                  label="生产数量"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="nums"
+                >
+                  <el-input
+                    onkeyup="this.value = this.value.replace(/[^\d]/g,'');"
+                    placeholder="生产数量"
+                    v-model="addform.nums"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                  ></el-input>
+                </el-form-item>
+              </el-row>
 
-              <el-form-item label="生产日期" prop="productdate">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="ruleForm.productdate"
-                  style="width: 95%;"
-                ></el-date-picker>
-              </el-form-item>
+              <el-row>
+                <el-form-item
+                  label="生产日期"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="productDate"
+                >
+                  <el-date-picker
+                    v-model="addform.productDate"
+                    type="date"
+                    placeholder="选择日期"
+                    :picker-options="pickerOptions"
+                    style="width:400px;margin-left:-70px"
+                  ></el-date-picker>
+                </el-form-item>
+              </el-row>
 
-              <el-form-item label="批次号" prop="batch" style="margin-left:-30px">
-                <el-input type="text" v-model="ruleForm.batch" style="width:110%"></el-input>
-              </el-form-item>
-              <br />
-              <br />
+              <el-row>
+                <el-form-item
+                  label="生产批次"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="batch"
+                >
+                  <el-input
+                    placeholder="批次号"
+                    v-model="addform.batch"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                  ></el-input>
+                </el-form-item>
+              </el-row>
 
-              <el-form-item label="数量" prop="nums">
-                <el-input type="number" v-model="ruleForm.nums" style="width:110%"></el-input>
-              </el-form-item>
+              <el-row>
+                <el-form-item
+                  label="部门名称"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="departmentId"
+                >
+                  <el-select
+                    v-model="addform.departmentId"
+                    placeholder="选择部门名称"
+                    style="width:400px;margin-left:-70px"
+                  >
+                    <el-option
+                      v-for="(item,index) in departments"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.id"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+              </el-row>
 
-              <el-form-item label="操作员" prop="Operatorid" style="margin-left:0px;">
-                <el-select v-model="ruleForm.Operatorid" placeholder="请选择操作员名称">
-                  <el-option
-                    v-for="item in allstaff"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.id"
-                  ></el-option>
-                </el-select>
-              </el-form-item>
-              <br />
-              <br />
-
-              <el-form-item label="备注" prop="Remark">
-                <el-input v-model="ruleForm.Remark" style="width:110%"></el-input>
-              </el-form-item>
-
-              <br />
-              <el-form-item style="margin-left:430px;">
-                <el-button type="primary" @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="resetForm('ruleForm')">重置</el-button>
-                <el-button type="success" @click="submitForm('ruleForm')">立即添加</el-button>
-              </el-form-item>
+              <el-row>
+                <el-form-item
+                  label="计划备注"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                >
+                  <el-input
+                    type="textarea"
+                    :rows="2"
+                    placeholder="请输入备注"
+                    maxlength="100"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                    v-model="addform.remark"
+                  ></el-input>
+                </el-form-item>
+              </el-row>
             </el-form>
+
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">取 消</el-button>
+              <el-button type="success" @click="addformsubmit(addform)">确 定</el-button>
+            </div>
           </el-dialog>
-
-          <el-dialog
-            title="填写待质检产品"
-            :visible.sync="dialogVisible2"
-            width="50%"
-            :before-close="handleClose"
-          >
-            <el-form
-              :model="ruleForm2"
-              :rules="rules"
-              ref="ruleForm"
-              label-width="100px"
-              class="demo-ruleForm"
-            >
-              <el-form-item label="质检单编号" prop="qmid" style="margin-left:0px;">
-                <el-input v-model="ruleForm.qmid" style="width:110%"></el-input>
-              </el-form-item>
-
-              <el-form-item label="生产单号" prop="taskid">
-                <el-input v-model="ruleForm2.taskid" style="width:110%"></el-input>
-              </el-form-item>
-              <br />
-              <br />
-
-              <el-form-item label="质检日期" prop="qmdate">
-                <el-date-picker
-                  type="date"
-                  placeholder="选择日期"
-                  v-model="ruleForm2.qmdate"
-                  style="width: 95%;"
-                ></el-date-picker>
-              </el-form-item>
-
-              <el-form-item label="质检结果" prop="result" style="margin-left:-28px;">
-                <el-select v-model="ruleForm2.result" placeholder="请选择质检结果" style="width:100%">
-                  <el-option value="合格">合格</el-option>
-                  <el-option value="不合格">不合格</el-option>
-                </el-select>
-              </el-form-item>
-              <br />
-              <br />
-
-              <el-form-item label="经手人" prop="handleid" style="margin-left:0px;">
-                <el-select v-model="ruleForm2.handleid" placeholder="请选择经手人名称">
-                  <el-option
-                    v-for="item in allstaff"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.id"
-                  ></el-option>
-                </el-select>
-              </el-form-item>
-
-              <el-form-item label="操作人" prop="Operatorid" style="margin-left:-13px;">
-                <el-select v-model="ruleForm2.Operatorid" placeholder="请选择操作人名称">
-                  <el-option
-                    v-for="item in allstaff"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.id"
-                  ></el-option>
-                </el-select>
-              </el-form-item>
-              <br />
-              <br />
-
-              <el-form-item label="备注" prop="Remark">
-                <el-input v-model="ruleForm2.Remark" style="width:110%"></el-input>
-              </el-form-item>
-
-              <br />
-              <el-form-item style="margin-left:430px;">
-                <el-button type="primary" @click="dialogVisible2 = false">取 消</el-button>
-                <el-button type="primary" @click="resetForm('ruleForm2')">重置</el-button>
-                <el-button type="success" @click="submitForm('ruleForm2')">立即添加</el-button>
-              </el-form-item>
-            </el-form>
-          </el-dialog>
-
           <el-button
             type="primary"
             @click="onSelectALL"
@@ -230,16 +219,28 @@
       :header-cell-style="thStyleFun"
       :cell-style="cellStyleFun"
     >
-      <el-table-column prop="id" label="计划编号"></el-table-column>
-      <el-table-column prop="productName" label="产品名称"></el-table-column>
-      <el-table-column prop="nums" label="计划产量"></el-table-column>
+      <el-table-column width="130%" prop="id" label="计划编号"></el-table-column>
+      <el-table-column width="150%" prop="productName" label="产品名称"></el-table-column>
+      <el-table-column width="130%" prop="nums" label="计划产量"></el-table-column>
       <el-table-column prop="productDate" label="生产时间" :formatter="formatDate"></el-table-column>
       <el-table-column prop="operatorName" label="经手人"></el-table-column>
       <el-table-column prop="no" label="订单编号" :formatter="formatterColumnstate"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <!-- @click="onEdit(scope.$index, scope.row)" -->
-          <el-button type="primary" @click="onEdit(scope.$index, scope.row)" icon="el-icon-edit">编辑</el-button>
+          <el-button
+            type="primary"
+            @click="editInfo(scope.row.id)"
+            v-if="scope.row.status==0"
+            icon="el-icon-edit"
+          >编辑</el-button>
+          <el-button type="primary" v-else disabled icon="el-icon-edit">编辑</el-button>
+          <el-button
+            type="danger"
+            @click="delInfo(scope.row.id)"
+            v-if="scope.row.status==0"
+            icon="el-icon-delete"
+          >删除</el-button>
+          <el-button type="danger" v-else disabled icon="el-icon-delete">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -250,9 +251,20 @@
 export default {
   data() {
     return {
-      alldepart: [],
-      allstaff: [],
-      allproducts: [],
+      slorder: [], //订单编号
+      products: [], //产品编号
+      departments: [], //部门编号
+      //设置添加表单样式
+      addformstyle: {
+        width: "100%",
+        "margin-left": "0px",
+      },
+      //设置日期控件
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() <= Date.now();
+        },
+      },
       formInline: {
         taskid: "",
         year: "",
@@ -279,53 +291,166 @@ export default {
         Remark: "",
       },
       rules: {
-        nums: [{ required: true, message: "请输入数量", trigger: "change" }],
-        no: [{ required: true, message: "请输入生产单号", trigger: "change" }],
-        Productid: [
+        id: [{ required: true, message: "请输入计划编号", trigger: "change" }],
+        productId: [
           { required: true, message: "请选择产品名称", trigger: "change" },
         ],
-        productdate: [
+        nums: [
+          { required: true, message: "请输入生产数量", trigger: "change" },
+        ],
+        productDate: [
           { required: true, message: "请输入生产日期", trigger: "change" },
         ],
         batch: [{ required: true, message: "请输入批次号", trigger: "change" }],
-        departmentid: [
+        departmentId: [
           { required: true, message: "请选择部门名称", trigger: "change" },
         ],
-        Operatorid: [
-          { required: true, message: "请选择操作员", trigger: "change" },
-        ],
-        qmid: [
-          { required: true, message: "请选择订单编号", trigger: "change" },
-        ],
-
-        taskid: [
-          { required: true, message: "请输入生产单号", trigger: "change" },
-        ],
-        qmdate: [
-          { required: true, message: "请选择质检日期", trigger: "change" },
-        ],
-        result: [
-          { required: true, message: "请选择质检结果", trigger: "change" },
-        ],
-        handleid: [
-          { required: true, message: "请选择经手人", trigger: "change" },
-        ],
       },
-
-      dialogVisible: false,
-      dialogVisible2: false,
       tableData: [],
+      dialogFormVisible: false,
+      addform: {
+        id: "", //计划编号
+        no: "", //订单编号
+        productId: "", //产品编号
+        nums: "", //计划生产数量
+        productDate: "", //计划生产日期
+        batch: "", //批次号
+        departmentId: "", //部门编号
+        operatorId: "", //经手人
+        operateTime: "", //操作日期
+        status: "", //状态
+        remark: "", //备注
+        qmId: "", //质检单编号
+      },
+      formLabelWidth: "80px",
     };
   },
-  created() {
-    this.tableinitialization();
+  mounted() {
+    var that = this;
+    this.$axios
+      .get("/ProductionManagement/GetPPTs")
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          that.tableData.push(response.data[i]);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
   methods: {
-    tableinitialization() {
+    //编辑计划
+    editInfo(id) {
+      alert(id);
+    },
+    //删除计划
+    delInfo(id) {
+      var that = this;
+      this.$confirm("此操作将永久删除该条记录，是否继续？","提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          this.$axios
+        .delete("/ProductionManagement/DeletePPT", {
+          params: {
+            taskid: id,
+          },
+        })
+        .then(function (response) {
+          if (response.data > 0) {
+            that.selecttablelist();
+            that.$message.success("删除成功！");
+          } else {
+            that.$message.success("删除失败！");
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        })
+        .catch(() => {
+          that.$message.success("已取消操作！");
+        });
+    },
+    //获取下拉列表所需的数据
+    getselectlist() {
+      var that = this;
+      this.$axios
+        .get("/ProductionManagement/GetSOS")
+        .then(function (response) {
+          that.slorder = [];
+          for (var i = 0; i < response.data.length; i++) {
+            that.slorder.push(response.data[i]);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      this.$axios
+        .get("/ProductionManagement/GetPPs")
+        .then(function (response) {
+          that.products = [];
+          for (var i = 0; i < response.data.length; i++) {
+            that.products.push(response.data[i]);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      this.$axios
+        .get("/ProductionManagement/GetADs")
+        .then(function (response) {
+          that.departments = [];
+          for (var i = 0; i < response.data.length; i++) {
+            that.departments.push(response.data[i]);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    //表单提交
+    addformsubmit(addform) {
+      var that = this;
+      this.$refs.addform.validate((valid) => {
+        if (valid) {
+          var date = new Date(that.addform.productDate);
+          var year = date.getFullYear();
+          var month = date.getMonth();
+          var day = date.getDate();
+          that.addform.productDate = year + "-" + month + "-" + day;
+          alert(that.addform.productDate);
+          this.$axios
+            .post("/ProductionManagement/AddPPT", that.addform)
+            .then(function (response) {
+              if (response.data > 0) {
+                that.$message.success("添加成功！");
+                that.selecttablelist();
+                that.addform = {};
+                that.dialogFormVisible = false;
+              } else if (response.data == -99) {
+                that.$message.error("该订单编号已被占用！");
+              } else {
+                that.$message.error("添加失败！");
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        } else {
+          console.log("valid错误!");
+          return false;
+        }
+      });
+    },
+    selecttablelist() {
       var that = this;
       this.$axios
         .get("/ProductionManagement/GetPPTs")
         .then(function (response) {
+          that.tableData = [];
           for (var i = 0; i < response.data.length; i++) {
             that.tableData.push(response.data[i]);
           }
@@ -344,7 +469,6 @@ export default {
         var date = new Date(that.formInline.year);
         fomatyear = date.getFullYear();
       }
-      alert(fomatyear);
       this.$axios
         .get("/ProductionManagement/GetPPT", {
           params: {
@@ -425,90 +549,6 @@ export default {
           });
       }
     }, //模态框
-    handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then((_) => {
-          done();
-        })
-        .catch((_) => {});
-    }, //添加
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          //this.$message.error("暂无数据，请勿操作!");
-          var that = this;
-          this.$axios
-            .post("/SaleManagement/Add", that.ruleForm)
-            .then(function (response) {
-              console.log(response.data);
-              if (response.data > 0) {
-                that.$message.success("添加成功！");
-                that.ruleForm = {};
-              } else {
-                that.$message.error("添加失败！");
-                that.ruleForm = {};
-              }
-            })
-            .catch(function (error) {
-              that.$message.error("添加失败error2！");
-            });
-        } else {
-          console.log("valid错误!");
-          return false;
-        }
-      });
-    }, //编辑(第一次查询)
-    onEdit(index, row) {
-      this.dialogVisible2 = true; //dialog对话窗口打开
-      //this.ruleForm2 = Object.assign({}, row);//将数据传入dialog页面
-      //this.ruleForm2.index=index;//传递当前index
-      //this.$message.error("暂无数据，请勿操作!");
-      var that = this;
-      this.$axios
-        .get("/SaleManagement/GetSSOID", {
-          params: {
-            id: row.no,
-          },
-        })
-        .then(function (response) {
-          console.log(response.data);
-          console.log(response.data.ProductId);
-          that.ruleForm2 = response.data;
-          //onSelectALL();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }, //编辑(修改数据)
-    submitForm2(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          //this.$message.error("暂无数据，请勿操作!");
-          var that = this;
-          this.$axios
-            .post("/SaleManagement/EditSSO", that.ruleForm2)
-            .then(function (response) {
-              console.log(response.data);
-              if (response.data > 0) {
-                that.$message.success("修改成功！");
-                that.ruleForm2 = {};
-              } else {
-                that.$message.error("修改成功！");
-                that.ruleForm2 = {};
-              }
-            })
-            .catch(function (error) {
-              that.$message.error("添加失败error2！");
-            });
-        } else {
-          console.log("valid错误!");
-          return false;
-        }
-      });
-    }, //重置
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
   },
 };
 </script>
