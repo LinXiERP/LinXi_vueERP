@@ -60,20 +60,13 @@ const routes = [{
         name: "CommodityInventory",
         component: resolve => require(['../views/Home.vue'], resolve),
         children: [{
-            path: "CommodityInventoryInfo",
-            name: "CommodityInventoryInfo",
-            component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
-        }]
-
-    },
-    {
-        path: "/CommodityInventory",
-        name: "CommodityInventory",
-        component: resolve => require(['../views/Home.vue'], resolve),
-        children: [{
             path: "PuOrderInfo",
             name: "PuOrderInfo",
             component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
+        }, {
+            path: "CommodityInventoryInfo",
+            name: "CommodityInventoryInfo",
+            component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
         }]
 
     },
@@ -132,6 +125,10 @@ const routes = [{
             path: "Statistics",
             name: "Statistics",
             component: resolve => require(['../components/PurchasingStatistics.vue'], resolve)
+        }, {
+            path: "Create",
+            name: "Create",
+            component: resolve => require(['../components/PurchasingCreate.vue'], resolve)
         }]
     },{
         path: "/ProductionManagement",

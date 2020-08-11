@@ -52,8 +52,8 @@
                 placeholder="商品类别"
               >
                 <el-option
-                  :label="v"
-                  :value="v"
+                  :label="v.key"
+                  :value="v.key"
                   v-for="(v,i) in allCategoryName"
                   :key="i"
                 ></el-option>
@@ -76,12 +76,12 @@
               >曲线图</el-radio>
             </el-form-item>
 
-            <el-form-item>
+            <!-- <el-form-item>
               <el-button
                 type="primary"
                 @click="BtnSearch"
               >查询</el-button>
-            </el-form-item>
+            </el-form-item> -->
           </el-form>
         </div>
       </el-col>
@@ -94,33 +94,29 @@
           <el-timeline-item
             timestamp="第一步"
             placement="top"
-            v-show="!this.formSearch.year"
-            color="#0bbd87"
+            :color="(this.formSearch.year?'#0bbd87':'')"
             size="large"
           >
             <el-card>
               <h4>选择采购年份</h4>
-              <!-- <p>王小虎 提交于 2018/4/12 20:46</p> -->
             </el-card>
           </el-timeline-item>
           <el-timeline-item
             timestamp="第二步"
             placement="top"
-            v-show="!this.formSearch.CategoryName"
+            :color="(this.formSearch.CategoryName?'#0bbd87':'')"
           >
             <el-card>
               <h4>选择商品类别</h4>
-              <!-- <p>王小虎 提交于 2018/4/3 20:46</p> -->
             </el-card>
           </el-timeline-item>
           <el-timeline-item
             timestamp="第三步"
             placement="top"
-            v-show="!this.radio"
+            :color="(this.radio?'#0bbd87':'')"
           >
             <el-card>
               <h4>请选择统计图形类别</h4>
-              <!-- <p>王小虎 提交于 2018/4/2 20:46</p> -->
             </el-card>
           </el-timeline-item>
         </el-timeline>
@@ -167,40 +163,7 @@ export default {
       PurchaseList: [],
       PurchaseEditObj: {},
       allCategoryName: [],
-      mockData: [
-        {
-          type: "家具家电",
-          sales: 38,
-        },
-        {
-          type: "粮油副食",
-          sales: 52,
-        },
-        {
-          type: "生鲜水果",
-          sales: 61,
-        },
-        {
-          type: "美容洗护",
-          sales: 145,
-        },
-        {
-          type: "母婴用品",
-          sales: 48,
-        },
-        {
-          type: "进口食品",
-          sales: 38,
-        },
-        {
-          type: "食品饮料",
-          sales: 38,
-        },
-        {
-          type: "家庭清洁",
-          sales: 38,
-        },
-      ],
+      mockData: [],
       loading: false,
       radio: "",
     };
@@ -223,107 +186,144 @@ export default {
             Number(res.data.msg) % 2 == 0
               ? Number(res.data.msg) / that.pageSize
               : Number(res.data.msg) / that.pageSize + 1;
-          console.log(that.totalNum);
+        });
+    },
+    SendLoad() {
+      var that = this;
+      this.$axios
+        .get(
+          `/PurchasingManagement/AllStatisc?year=${this.formSearch.year}&CategoryName=${this.formSearch.CategoryName}`
+        )
+        .then((res) => {
+          if (res.data.entity.length != 0) {
+            that.mockData = res.data.entity;
+          } else {
+            that.mockData = [
+              {
+                key: "01月",
+                value: 0,
+              },
+            ];
+          }
+
+          if (that.radio == "1") {
+            that.columnPlots();
+          } else if (that.radio == "2") {
+            that.piePlots();
+          } else if (that.radio == "3") {
+            that.linePlots();
+          }
         });
     },
     async loadinfo() {
-      // const { data: res } = await this.$axios.get(
-      //   "/PurchasingManagement/AllStatisc"
-      // );
-      // this.loading = false;
-      // if (res.entity.length != 0) {
-      //   res.entity.forEach((element) => {
-      //     element.purchaseDate = element.purchaseDate.substring(0, 10);
-      //   });
-      // }
-      // this.PurchaseList = res.entity;
       const { data: ress } = await this.$axios.get(
         "/PurchasingManagement/AllCategoryName"
       );
       this.allCategoryName = ress.entity;
       // this.formSearch.CategoryName = this.allCategoryName[0];
     },
+    columnPlots() {
+      var that = this;
+      $("#canvas").html(" ");
+      //柱形
+      that.columnPlot = new that.$G2.Column("canvas", {
+        data: that.mockData,
+        title: {
+          visible: true,
+          text: "柱形图",
+        },
+        description: {
+          visible: true,
+          text: "",
+        },
+        forceFit: true,
+        padding: "auto",
+        xField: "key",
+        yField: "value",
+        meta: {
+          key: {
+            alias: "采购统计",
+          },
+          value: {
+            alias: "采购量",
+          },
+        },
+        label: {
+          visible: true,
+          style: {
+            fill: "#0D0E68",
+            fontSize: 12,
+            fontWeight: 600,
+            opacity: 0.6,
+          },
+        },
+      });
+      that.columnPlot.render();
+    },
+    piePlots() {
+      $("#Abe").html(" ");
+
+      const piePlot = new this.$G2.Pie(document.getElementById("Abe"), {
+        forceFit: true,
+        title: {
+          visible: true,
+          text: "多色饼图",
+        },
+        description: {
+          visible: true,
+          text: "",
+        },
+        radius: 0.8,
+        data: this.mockData,
+        angleField: "value",
+        colorField: "key",
+        label: {
+          visible: true,
+          type: "inner",
+        },
+      });
+
+      piePlot.render();
+    },
+    linePlots() {
+      var that = this;
+      $("#Line").html(" ");
+
+      //曲线
+      const linePlot = new that.$G2.Line(document.getElementById("Line"), {
+        title: {
+          visible: true,
+          text: "曲线图",
+        },
+        description: {
+          visible: true,
+          text: "",
+        },
+        meta: {
+          key: {
+            alias: "年份",
+            range: [0, 1],
+          },
+          value: {
+            alias: "采购量",
+            formatter: (v) => {
+              return `${v}`;
+            },
+          },
+        },
+        padding: "auto",
+        forceFit: true,
+        data: that.mockData,
+        xField: "key",
+        yField: "value",
+        smooth: true,
+      });
+
+      linePlot.render();
+    },
   },
   mounted() {
     this.loadinfo();
-    //柱形
-    const columnPlot = new this.$G2.Column("canvas", {
-      data: this.mockData,
-      title: {
-        visible: true,
-        text: "",
-      },
-      description: {
-        visible: true,
-        text: "",
-      },
-      forceFit: true,
-      padding: "auto",
-      xField: "type",
-      yField: "sales",
-      meta: {
-        type: {
-          alias: "采购统计",
-        },
-        sales: {
-          alias: "销售额(万)",
-        },
-      },
-      label: {
-        visible: true,
-        style: {
-          fill: "#0D0E68",
-          fontSize: 12,
-          fontWeight: 600,
-          opacity: 0.6,
-        },
-      },
-    });
-    columnPlot.render();
-
-    //饼型
-    const piePlot = new this.$G2.Pie(document.getElementById("Abe"), {
-      forceFit: true,
-      title: {
-        visible: true,
-        text: "",
-      },
-      description: {
-        visible: true,
-        text: "",
-      },
-      radius: 0.8,
-      data: this.mockData,
-      angleField: "sales",
-      colorField: "type",
-      label: {
-        visible: true,
-        type: "spider",
-      },
-    });
-
-    piePlot.render();
-
-    //曲线
-
-    const linePlot = new this.$G2.Line(document.getElementById("Line"), {
-      title: {
-        visible: true,
-        text: "",
-      },
-      description: {
-        visible: true,
-        text: "",
-      },
-      padding: "auto",
-      forceFit: true,
-      data: this.mockData,
-      xField: "type",
-      yField: "sales",
-      smooth: true,
-    });
-
-    linePlot.render();
   },
   computed: {
     Allvisable() {
@@ -338,23 +338,22 @@ export default {
       }
     },
   },
+  watch: {
+    radio(newval, oldval) {
+      if (this.formSearch.CategoryName != "" && this.formSearch.year != "") {
+        this.SendLoad();
+      }
+    },
+    "formSearch.CategoryName"(newval, oldval) {
+      if (this.radio != "" && this.formSearch.year != "") {
+        this.SendLoad();
+      }
+    },
+    "formSearch.year"(newval, oldval) {
+      if (this.radio != "" && this.formSearch.CategoryName != "") {
+        this.SendLoad();
+      }
+    },
+  },
 };
 </script>
-<style>
-/* .el-col {
-  border-radius: 4px;
-}
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-} */
-</style>

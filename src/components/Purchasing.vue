@@ -36,8 +36,12 @@
               placeholder="商品类别"
             >
               <el-option
-                :label="v"
-                :value="v"
+                label="全部"
+                value=" "
+              ></el-option>
+              <el-option
+                :label="v.key"
+                :value="v.key"
                 v-for="(v,i) in allCategoryName"
                 :key="i"
               ></el-option>
@@ -58,8 +62,10 @@
       <el-table
         :data="PurchaseList"
         stripe
+        height="800"
+        :row-style="{height:50+'px'}"
         v-loading="loading"
-        style="width: 100%"
+        style="width: 100%;"
       >
         <el-table-column
           prop="id"
@@ -690,8 +696,8 @@ export default {
       PurchaseEditObj: {},
       activeName: "first",
       currentPage: 1, //默认显示第一页
-      pageSize: 15, //默认每页显示8条
-      totalNum: 0, //总页数
+      pageSize: 15, //默认每页显示15条
+      totalNum: 0, //总数量
     };
   },
   methods: {
@@ -708,11 +714,7 @@ export default {
             });
           }
           that.PurchaseList = res.data.entity;
-          that.totalNum =
-            Number(res.data.msg) % 2 == 0
-              ? Number(res.data.msg) / that.pageSize
-              : Number(res.data.msg) / that.pageSize + 1;
-          console.log(that.totalNum);
+          that.totalNum = Number(res.data.msg);
         });
     },
     openPayment(index) {
@@ -792,11 +794,7 @@ export default {
             });
           }
           that.PurchaseList = res.data.entity;
-          that.totalNum =
-            Number(res.data.msg) % 2 == 0
-              ? Number(res.data.msg) / that.pageSize
-              : Number(res.data.msg) / that.pageSize + 1;
-          console.log(that.totalNum);
+          that.totalNum = Number(res.data.msg);
         });
     },
     async loadinfo() {
@@ -814,10 +812,9 @@ export default {
         "/PurchasingManagement/AllCategoryName"
       );
       this.allCategoryName = ress.entity;
-      this.totalNum =
-        Number(res.msg) % 2 == 0
-          ? Number(res.msg) / this.pageSize
-          : Number(res.msg) / this.pageSize + 1;
+
+      console.log(ress.entity);
+      this.totalNum = Number(res.msg);
     },
   },
   mounted() {
@@ -839,5 +836,3 @@ export default {
   },
 };
 </script>
-
-

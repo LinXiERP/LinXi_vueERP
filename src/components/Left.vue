@@ -74,6 +74,13 @@
             <span>采购管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
+<<<<<<< Updated upstream
+=======
+            <el-menu-item
+              index="4-1"
+              @click="GoPath(`/PurchaseManagement/Create`)"
+            >添加采购单</el-menu-item>
+>>>>>>> Stashed changes
             <el-menu-item
               index="4-1"
               @click="GoPath(`/PurchaseManagement/Create`)"
