@@ -33,15 +33,9 @@
               </el-form-item>
             </el-col>
             <el-col :span="4">
-<<<<<<< HEAD
-              <el-button type="primary" icon="el-icon-search">搜索</el-button>
-            </el-col>
-            <el-button
-=======
               <el-button type="primary" icon="el-icon-search" @click="SelectCustomerOrder">搜索</el-button>
             </el-col>
             <!-- <el-button
->>>>>>> 2e920e8d41c0755c7fcb4ed996c3d62d034f4ac7
               slot="append"
               icon="el-icon-search"
               style="width:150px;"
@@ -84,87 +78,91 @@
         </el-row>
       </el-tab-pane>
 
-      <el-tab-pane label="编辑订单" name="second">
+      <el-tab-pane label="编辑订单" name="second" disabled>
         <el-form ref="Customer" :model="CustomerOrderItem" label-width="90px" size="medium">
           <el-row>
             <el-col :span="24">
               <div
                 class="grid-content bg-purple-dark"
                 style="text-align:center;font-size:25px;margin-bottom:15px;"
-              >添加客户</div>
+              >编辑订单</div>
             </el-col>
           </el-row>
 
           <el-row>
             <el-col :span="8">
-              <el-form-item label="客户姓名">
-                <el-input v-model="CustomerOrderItem.name" placeholder="客户姓名"></el-input>
+              <el-form-item label="客户编号">
+                <el-select
+                  v-model="CustomerOrderItem.customerId"
+                  filterable
+                  allow-create
+                  default-first-option
+                  clearable
+                  required
+                  placeholder="请选择或输客户名"
+                  style="width:100%;"
+                >
+                  <el-option
+                    v-for="item in allusers"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="String(item.id)"
+                  ></el-option>
+                </el-select>
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="邮政编码">
-                <el-input v-model="CustomerOrderItem.postcode" placeholder="邮政编码"></el-input>
+              <el-form-item label="产品编号">
+                <el-select
+                  v-model="CustomerOrderItem.productId"
+                  filterable
+                  allow-create
+                  default-first-option
+                  clearable
+                  required
+                  placeholder="请选择或输入产品名"
+                  style="width:100%;"
+                >
+                  <el-option
+                    v-for="item in allproducts"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="String(item.id)"
+                  ></el-option>
+                </el-select>
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="客户地址">
-                <el-input v-model="CustomerOrderItem.address" placeholder="客户地址"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="联系电话">
-                <el-input v-model="CustomerOrderItem.custtel" placeholder="联系电话"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="联系人">
-                <el-input v-model="CustomerOrderItem.linkman" placeholder="联系人"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="联系人电话">
-                <el-input v-model="CustomerOrderItem.linktel" placeholder="联系人电话"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="邮箱账号">
-                <el-input v-model="CustomerOrderItem.email" placeholder="邮箱账号"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="客户性别">
-                <el-input v-model="CustomerOrderItem.sex" placeholder="客户性别"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="客户生日">
-                <el-input v-model="CustomerOrderItem.birthday" placeholder="客户生日"></el-input>
+              <el-form-item label="数量">
+                <el-input
+                  v-model="CustomerOrderItem.nums"
+                  placeholder="数量"
+                  required
+                  oninput="value=value.replace(/[^\d]/g,'')"
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
 
           <el-row>
             <el-col :span="8">
-              <el-form-item label="客户爱好">
-                <el-input v-model="CustomerOrderItem.love" placeholder="客户爱好"></el-input>
+              <el-form-item label="交货日期">
+                <el-date-picker
+                  v-model="CustomerOrderItem.deliveryDate"
+                  type="date"
+                  placeholder="交货日期"
+                  clearable:true
+                  required
+                  style="width:100%"
+                ></el-date-picker>
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="备注">
-                <el-input v-model="CustomerOrderItem.remark" placeholder="备注"></el-input>
+              <el-form-item label="交货方式">
+                <el-input v-model="CustomerOrderItem.deliveryWay" placeholder="交货方式"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -176,7 +174,7 @@
                   type="primary"
                   style="width:90%;height:50px;"
                   @click="UpdateCustomerOrder"
-                >提交</el-button>
+                >修改</el-button>
               </el-col>
               <el-col :span="10">
                 <el-button type="warning" style="width:90%;height:50px;">重置</el-button>
@@ -193,80 +191,54 @@
               <div
                 class="grid-content bg-purple-dark"
                 style="text-align:center;font-size:25px;margin-bottom:15px;"
-              >添加客户</div>
+              >订单详情</div>
             </el-col>
           </el-row>
 
           <el-row>
             <el-col :span="8">
               <el-form-item label="客户姓名">
-                <el-input v-model="CustomerOrderItem.name" placeholder="客户姓名"></el-input>
+                <el-input :value="CustomerOrderItem.customerName" readonly></el-input> 
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="邮政编码">
-                <el-input v-model="CustomerOrderItem.postcode" placeholder="邮政编码"></el-input>
+              <el-form-item label="产品名称">
+                   <el-input :value="CustomerOrderItem.productName" readonly></el-input>
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="客户地址">
-                <el-input v-model="CustomerOrderItem.address" placeholder="客户地址"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="联系电话">
-                <el-input v-model="CustomerOrderItem.custtel" placeholder="联系电话"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="联系人">
-                <el-input v-model="CustomerOrderItem.linkman" placeholder="联系人"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="联系人电话">
-                <el-input v-model="CustomerOrderItem.linktel" placeholder="联系人电话"></el-input>
+              <el-form-item label="数量">
+                <el-input
+                  v-model="CustomerOrderItem.nums"
+                  placeholder="数量"
+                  required
+                  readonly
+                  oninput="value=value.replace(/[^\d]/g,'')"
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
 
           <el-row>
             <el-col :span="8">
-              <el-form-item label="邮箱账号">
-                <el-input v-model="CustomerOrderItem.email" placeholder="邮箱账号"></el-input>
+              <el-form-item label="交货日期">
+                <el-date-picker
+                  v-model="CustomerOrderItem.deliveryDate"
+                  type="date"
+                  placeholder="交货日期"
+                  clearable:true
+                  required
+                  readonly
+                  style="width:100%"
+                ></el-date-picker>
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="客户性别">
-                <el-input v-model="CustomerOrderItem.sex" placeholder="客户性别"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="客户生日">
-                <el-input v-model="CustomerOrderItem.birthday" placeholder="客户生日"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="客户爱好">
-                <el-input v-model="CustomerOrderItem.love" placeholder="客户爱好"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="备注">
-                <el-input v-model="CustomerOrderItem.remark" placeholder="备注"></el-input>
+              <el-form-item label="交货方式">
+                <el-input v-model="CustomerOrderItem.deliveryWay" placeholder="交货方式" readonly></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -287,22 +259,22 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="客户编号">
-                 <el-select
-                  v-model="CustomerOrderItem.product_id"
+                <el-select
+                  v-model="CustomerOrderItem.customerId"
                   filterable
                   allow-create
                   default-first-option
                   clearable
-                  placeholder="请选择或输入产品名"
+                  required
+                  placeholder="请选择或输客户名"
                   style="width:100%;"
                 >
                   <el-option
                     v-for="item in allusers"
-                    :key="item.name"
+                    :key="item.id"
                     :label="item.name"
                     :value="item.id"
-                  >
-                  </el-option>
+                  ></el-option>
                 </el-select>
                 <!-- <el-input v-model="CustomerOrderItem.customer_id" placeholder="客户编号"></el-input> -->
               </el-form-item>
@@ -311,21 +283,21 @@
             <el-col :span="8">
               <el-form-item label="产品编号">
                 <el-select
-                  v-model="CustomerOrderItem.product_id"
+                  v-model="CustomerOrderItem.productId"
                   filterable
                   allow-create
                   default-first-option
                   clearable
+                  required
                   placeholder="请选择或输入产品名"
                   style="width:100%;"
                 >
                   <el-option
                     v-for="item in allproducts"
-                    :key="item.productName"
-                    :label="item.productName"
+                    :key="item.name"
+                    :label="item.name"
                     :value="item.id"
-                  >
-                  </el-option>
+                  ></el-option>
                 </el-select>
 
                 <!-- <el-input v-model="CustomerOrderItem.product_id" placeholder="产品编号"></el-input> -->
@@ -333,62 +305,34 @@
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="客户地址">
-                <el-input v-model="CustomerOrderItem.address" placeholder="客户地址"></el-input>
+              <el-form-item label="数量">
+                <el-input
+                  v-model="CustomerOrderItem.nums"
+                  placeholder="数量"
+                  required
+                  oninput="value=value.replace(/[^\d]/g,'')"
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
 
           <el-row>
             <el-col :span="8">
-              <el-form-item label="联系电话">
-                <el-input v-model="CustomerOrderItem.custtel" placeholder="联系电话"></el-input>
+              <el-form-item label="交货日期">
+                <el-date-picker
+                  v-model="CustomerOrderItem.deliveryDate"
+                  type="date"
+                  placeholder="交货日期"
+                  clearable:true
+                  required
+                  style="width:100%"
+                ></el-date-picker>
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="联系人">
-                <el-input v-model="CustomerOrderItem.linkman" placeholder="联系人"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="联系人电话">
-                <el-input v-model="CustomerOrderItem.linktel" placeholder="联系人电话"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="邮箱账号">
-                <el-input v-model="CustomerOrderItem.email" placeholder="邮箱账号"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="客户性别">
-                <el-input v-model="CustomerOrderItem.sex" placeholder="客户性别"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="客户生日">
-                <el-input v-model="CustomerOrderItem.birthday" placeholder="客户生日"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="客户爱好">
-                <el-input v-model="CustomerOrderItem.love" placeholder="客户爱好"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="备注">
-                <el-input v-model="CustomerOrderItem.remark" placeholder="备注"></el-input>
+              <el-form-item label="交货方式">
+                <el-input v-model="CustomerOrderItem.deliveryWay" placeholder="交货方式"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -417,18 +361,18 @@
 export default {
   data() {
     return {
-      allproducts:[],//所有产品
-      allusers:[],//所有用户
+      allproducts: [], //所有产品
+      allusers: [], //所有用户
       activeName: "first",
       select: "",
-      CustomerOrderItem: {}, //单个客户
+      CustomerOrderItem: {}, //单个订单
       currentPage: 1, //默认显示第一页
       pageSize: 8, //默认每页显示8条
       totalNum: 0, //总页数
       products: [],
-      CustomerOrderList: [], //客户集合
+      CustomerOrderList: [], //订单集合
       SearchCustomerOrder: {
-        //查询客户订单
+        //查询订单
         id: "", //订单id
         product: "所有", //产品类别
         status: "-100", //订单状态
@@ -442,11 +386,24 @@ export default {
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
-      this.CustomerOrderItem = {};
-
-      if(tab.name == 'fourth'){
-        	
-        }
+      this.CustomerOrderItem = {}; 
+      // if(tab.name=="second"){
+      //   activeName="first";
+      //   return;
+      // }
+      if (tab.name == "fourth") {
+        var t = this;
+        //进入添加客户订单界面
+        t.$axios
+          .get("/CustomerManagement/SelectAllProductandCustomer")
+          .then((res) => {
+            t.allproducts = res.data.product;
+            t.allusers = res.data.customer;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
@@ -455,9 +412,22 @@ export default {
       console.log(`当前页: ${val}`);
     },
     ToEditCustomerOrder(index, row) {
+      var t=this;
       this.CustomerOrderItem = this.CustomerOrderList[
         index + (this.currentPage - 1) * 8
       ];
+
+      //进入编辑客户订单界面
+      t.$axios
+        .get("/CustomerManagement/SelectAllProductandCustomer")
+        .then((res) => {
+          t.allproducts = res.data.product;
+          t.allusers = res.data.customer;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       this.activeName = "second";
     },
     TodetailCustomerOrder(index, row) {
@@ -480,10 +450,7 @@ export default {
       })
         .then(() => {
           this.$axios
-            .delete(
-              "http://localhost:56567/api/CustomerManagement/DeleteCustomerOrder?id=" +
-                t.id
-            )
+            .delete("/CustomerManagement/DeleteCustomerOrder?id=" + t.id)
             .then(function (response) {
               // alert(response.data.code);
               if (response.data.code === 200) {
@@ -511,9 +478,7 @@ export default {
     SelectAllCustomerOrder() {
       var t = this;
       this.$axios
-        .get(
-          "http://localhost:56567/api/CustomerManagement/GetAllCustomerOrder"
-        )
+        .get("/CustomerManagement/GetAllCustomerOrder")
         .then(function (response) {
           console.log(response.data);
           t.totalNum = response.data.length; //多少页数据
@@ -529,13 +494,10 @@ export default {
     UpdateCustomerOrder() {
       var t = this;
       this.$axios
-        .put(
-          "http://localhost:56567/api/CustomerManagement/UpdateCustomerOrder",
-          t.CustomerOrderItem
-        )
+        .put("/CustomerManagement/UpdateCustomerOrder", t.CustomerOrderItem)
         .then(function (response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+          console.log(response.data.code == 200);
+          if (response.data.code == 200) {
             t.$message.success("更新成功！");
             t.CustomerOrderItem = {};
           } else {
@@ -550,14 +512,12 @@ export default {
     //添加客户订单
     AddCustomerOrder() {
       var t = this;
+      t.CustomerOrderItem.userName = sessionStorage.getItem("name");
       this.$axios
-        .post(
-          "http://localhost:56567/api/CustomerManagement/AddCustomerOrder",
-          t.CustomerOrderItem
-        )
+        .post("/CustomerManagement/AddCustomerOrder", t.CustomerOrderItem)
         .then(function (response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+          console.log(response.data.code == 200);
+          if (response.data.code == 200) {
             t.$message.success("添加成功！");
             t.CustomerOrderItem = {};
           } else {
@@ -576,7 +536,7 @@ export default {
       var url = "";
       if (t.SearchCustomerOrder.id == "") {
         url =
-          "http://localhost:56567/api/CustomerManagement/SelectCustomerOrder?id=" +
+          "/CustomerManagement/SelectCustomerOrder?id=" +
           -1 +
           "&product=" +
           t.SearchCustomerOrder.product +
@@ -584,7 +544,7 @@ export default {
           t.SearchCustomerOrder.status;
       } else {
         url =
-          "http://localhost:56567/api/CustomerManagement/SelectCustomerOrder?id=" +
+          "/CustomerManagement/SelectCustomerOrder?id=" +
           t.SearchCustomerOrder.id +
           "&product=" +
           t.SearchCustomerOrder.product +
@@ -601,8 +561,7 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-    }
-    
+    },
   },
 };
 </script>

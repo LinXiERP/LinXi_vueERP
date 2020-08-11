@@ -76,6 +76,7 @@ const routes = [{
             component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
         }]
 
+<<<<<<< Updated upstream
     },
     {
         path: "/Customermanage",
@@ -120,9 +121,111 @@ const routes = [{
             name: "Noticeinfo",
             component: resolve => require(['../components/NoticeInfo.vue'], resolve)
         }]
+    }, {
+        path: "/PurchaseManagement",
+        name: "PurchaseManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "PurchaseEdit",
+            name: "PurchaseEdit",
+            component: resolve => require(['../components/Purchasing.vue'], resolve)
+        }, {
+            path: "Statistics",
+            name: "Statistics",
+            component: resolve => require(['../components/PurchasingStatistics.vue'], resolve)
+        }]
+    },{
+        path: "/ProductionManagement",
+        name: "ProductionManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "ProductionPlanManagement",
+            name: "ProductionPlanManagement",
+            component: resolve => require(['../components/ProductionPlanManagement.vue'], resolve)
+        },{
+            path: "ProductionPickingManagement",
+            name: "ProductionPickingManagement",
+            component: resolve => require(['../components/ProductionPickingManagement.vue'], resolve)
+        },{
+            path: "ProductionProductManagement",
+            name: "ProductionProductManagement",
+            component: resolve => require(['../components/ProductionProductManagement.vue'], resolve)
+        }]
     }
+=======
+  },
+  {
+    path: "/Customermanage",
+    name: "CustomerManage",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "CustomerManageInfo",
+      name: "CustomerManageInfo",
+      component: resolve => require(['../components/CustomerManageInfo.vue'], resolve)
+    }]
+  },
+  {
+    path: "/SaleManagement",
+    name: "SaleManagement",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SaleOrderManagement",
+      name: "SaleOrderManagement",
+      component: resolve => require(['../components/SaleOrderManagement.vue'], resolve)
+    }]
+  },
+  {
+    path: "/StaffManagement",
+    name: "StaffManagement",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "StaffManagementInfo",
+      name: "StaffManagementInfo",
+      component: resolve => require(['../components/StaffManagementInfo.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Notice",
+    name: "Notice",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "Noticeinfo",
+      name: "Noticeinfo",
+      component: resolve => require(['../components/NoticeInfo.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Salary",
+    name: "Salary",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SalaryManagementWait",
+      name: "SalaryManagementWait",
+      component: resolve => require(['../components/SalaryManagementWait.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Salary",
+    name: "Salary",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SalaryManagmentDefend",
+      name: "SalaryManagmentDefend",
+      component: resolve => require(['../components/SalaryManagmentDefend.vue'], resolve)
+    }]
+  },
+  {
+    path: "/Salary",
+    name: "Salary",
+    component: resolve => require(['../views/Home.vue'], resolve),
+    children: [{
+      path: "SalaryManagmentReport",
+      name: "SalaryManagmentReport",
+      component: resolve => require(['../components/SalaryManagmentReport.vue'], resolve)
+    }]
+  }
+>>>>>>> Stashed changes
 ]
-
 const router = new VueRouter({
     routes,
     mode: "history" //去掉路由中的#号
@@ -150,5 +253,4 @@ const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
-
 export default router
