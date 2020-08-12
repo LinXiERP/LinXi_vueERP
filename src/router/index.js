@@ -60,13 +60,10 @@ const routes = [{
         name: "CommodityInventory",
         component: resolve => require(['../views/Home.vue'], resolve),
         children: [{
-<<<<<<< Updated upstream
             path: "CommodityInventoryInfo",
             name: "CommodityInventoryInfo",
             component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
         }, {
-=======
->>>>>>> Stashed changes
             path: "PuOrderInfo",
             name: "PuOrderInfo",
             component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
@@ -158,7 +155,6 @@ const routes = [{
             name: "SalaryManagmentDefend",
             component: resolve => require(['../components/SalaryManagmentDefend.vue'], resolve)
         }, {
-<<<<<<< Updated upstream
             path: "SalaryManagmentReport",
             name: "SalaryManagmentReport",
             component: resolve => require(['../components/SalaryManagmentReport.vue'], resolve)
@@ -166,8 +162,7 @@ const routes = [{
             path: "SalaryManagementWait",
             name: "SalaryManagementWait",
             component: resolve => require(['../components/SalaryManagementWait.vue'], resolve)
-=======
-            path: "Statistics",
+        },{path: "Statistics",
             name: "Statistics",
             component: resolve => require(['../components/PurchasingStatistics.vue'], resolve)
         }, {
@@ -191,7 +186,6 @@ const routes = [{
             path: "ProductionProductManagement",
             name: "ProductionProductManagement",
             component: resolve => require(['../components/ProductionProductManagement.vue'], resolve)
->>>>>>> Stashed changes
         }]
     },
     {

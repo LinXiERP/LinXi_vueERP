@@ -73,7 +73,7 @@
                     placeholder="选择订单编号"
                     style="width:400px;margin-left:-70px"
                   >
-                    <el-option label="订单外" value></el-option>
+                    <el-option label="订单外" value=""></el-option>
                     <el-option
                       v-for="(item,index) in slorder"
                       :key="index"
@@ -202,6 +202,168 @@
               <el-button type="success" @click="addformsubmit(addform)">确 定</el-button>
             </div>
           </el-dialog>
+
+          <el-dialog title="编辑生产计划" :visible.sync="dialogEditFormVisible" width="40%">
+            <el-form :model="editform" :rules="rules" ref="editform">
+              <el-row>
+                <el-form-item
+                  label="计划编号"
+                  :label-width="formLabelWidth"
+                  prop="id"
+                  style="padding-bottom:20px;"
+                >
+                  <el-input
+                    onkeyup="this.value = this.value.replace(/[^\d]/g,'');"
+                    placeholder="计划编号"
+                    v-model="editform.id"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                    readonly
+                  ></el-input>
+                </el-form-item>
+              </el-row>
+
+              <el-row>
+                <el-form-item
+                  label="订单编号"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                >
+                  <el-select
+                    v-model="editform.no"
+                    placeholder="选择订单编号"
+                    style="width:400px;margin-left:-70px"
+                  >
+                    <el-option label="订单外" value></el-option>
+                    <el-option
+                      v-for="(item,index) in slorder"
+                      :key="index"
+                      :label="item.id"
+                      :value="item.id"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+              </el-row>
+
+              <el-row>
+                <el-form-item
+                  label="产品名称"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="productId"
+                >
+                  <el-select
+                    v-model="editform.productId"
+                    placeholder="选择产品名称"
+                    style="width:400px;margin-left:-70px"
+                  >
+                    <el-option
+                      v-for="(item,index) in products"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.id"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+              </el-row>
+
+              <el-row>
+                <el-form-item
+                  label="生产数量"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="nums"
+                >
+                  <el-input
+                    onkeyup="this.value = this.value.replace(/[^\d]/g,'');"
+                    placeholder="生产数量"
+                    v-model="editform.nums"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                  ></el-input>
+                </el-form-item>
+              </el-row>
+
+              <el-row>
+                <el-form-item
+                  label="生产日期"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="productDate"
+                >
+                  <el-date-picker
+                    v-model="editform.productDate"
+                    type="date"
+                    placeholder="选择日期"
+                    :picker-options="pickerOptions"
+                    style="width:400px;margin-left:-70px"
+                  ></el-date-picker>
+                </el-form-item>
+              </el-row>
+
+              <el-row>
+                <el-form-item
+                  label="生产批次"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="batch"
+                >
+                  <el-input
+                    placeholder="批次号"
+                    v-model="editform.batch"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                  ></el-input>
+                </el-form-item>
+              </el-row>
+
+              <el-row>
+                <el-form-item
+                  label="部门名称"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                  prop="departmentId"
+                >
+                  <el-select
+                    v-model="editform.departmentId"
+                    placeholder="选择部门名称"
+                    style="width:400px;margin-left:-70px"
+                  >
+                    <el-option
+                      v-for="(item,index) in departments"
+                      :key="index"
+                      :label="item.name"
+                      :value="item.id"
+                    ></el-option>
+                  </el-select>
+                </el-form-item>
+              </el-row>
+
+              <el-row>
+                <el-form-item
+                  label="计划备注"
+                  :label-width="formLabelWidth"
+                  style="padding-bottom:20px;"
+                >
+                  <el-input
+                    type="textarea"
+                    :rows="2"
+                    placeholder="请输入备注"
+                    maxlength="100"
+                    autocomplete="off"
+                    style="width:400px;margin-left:-70px"
+                    v-model="editform.remark"
+                  ></el-input>
+                </el-form-item>
+              </el-row>
+            </el-form>
+
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="dialogEditFormVisible = false">取 消</el-button>
+              <el-button type="success" @click="Editformsubmit(editform)">确 定</el-button>
+            </div>
+          </el-dialog>
+
           <el-button
             type="primary"
             @click="onSelectALL"
@@ -229,7 +391,7 @@
         <template slot-scope="scope">
           <el-button
             type="primary"
-            @click="editInfo(scope.row.id)"
+            @click="dialogEditFormVisible=true;editInfo(scope.row.id);getselectlist()"
             v-if="scope.row.status==0"
             icon="el-icon-edit"
           >编辑</el-button>
@@ -254,41 +416,17 @@ export default {
       slorder: [], //订单编号
       products: [], //产品编号
       departments: [], //部门编号
-      //设置添加表单样式
-      addformstyle: {
-        width: "100%",
-        "margin-left": "0px",
-      },
       //设置日期控件
       pickerOptions: {
         disabledDate(time) {
           return time.getTime() <= Date.now();
         },
       },
+      //查询内容
       formInline: {
         taskid: "",
         year: "",
         month: "",
-      },
-      ruleForm: {
-        no: "",
-        Productid: "",
-        productdate: "",
-        batch: "",
-        departmentid: "",
-        nums: "",
-        remark: "",
-        Operatorid: "",
-        qmid: "",
-      },
-      ruleForm2: {
-        qmid: "",
-        taskid: "",
-        qmdate: "",
-        result: "",
-        Operatorid: "",
-        handleid: "",
-        Remark: "",
       },
       rules: {
         id: [{ required: true, message: "请输入计划编号", trigger: "change" }],
@@ -308,7 +446,22 @@ export default {
       },
       tableData: [],
       dialogFormVisible: false,
+      dialogEditFormVisible: false,
       addform: {
+        id: "", //计划编号
+        no: "", //订单编号
+        productId: "", //产品编号
+        nums: "", //计划生产数量
+        productDate: "", //计划生产日期
+        batch: "", //批次号
+        departmentId: "", //部门编号
+        operatorId: "", //经手人
+        operateTime: "", //操作日期
+        status: "", //状态
+        remark: "", //备注
+        qmId: "", //质检单编号
+      },
+      editform: {
         id: "", //计划编号
         no: "", //订单编号
         productId: "", //产品编号
@@ -339,39 +492,72 @@ export default {
       });
   },
   methods: {
+    //提交修改
+    Editformsubmit(editform){
+      var that = this;
+      this.$refs.editform.validate((valid) => {
+        if (valid) {
+          var date = new Date(that.editform.productDate);
+          var year = date.getFullYear();
+          var month = date.getMonth();
+          var day = date.getDate();
+          that.editform.productDate = year + "-" + month + "-" + day;
+          this.$axios
+            .put("/ProductionManagement/EditPPT", that.editform)
+            .then(function (response) {
+              if (response.data > 0) {
+                that.$message.success("修改成功！");
+                that.selecttablelist();
+                that.editform = {};
+                that.dialogEditFormVisible = false;
+              } else {
+                that.$message.error("修改失败！");
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        } else {
+          console.log("valid错误!");
+          return false;
+        }
+      });
+    },
     //编辑计划
     editInfo(id) {
-      alert(id);
+      var index = this.tableData.findIndex(item => item.id == id);
+      var task = this.tableData[index];
+      this.editform=task;
     },
     //删除计划
     delInfo(id) {
       var that = this;
-      this.$confirm("此操作将永久删除该条记录，是否继续？","提示", {
+      this.$confirm("此操作将永久删除该条记录，是否继续？", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
           this.$axios
-        .delete("/ProductionManagement/DeletePPT", {
-          params: {
-            taskid: id,
-          },
-        })
-        .then(function (response) {
-          if (response.data > 0) {
-            that.selecttablelist();
-            that.$message.success("删除成功！");
-          } else {
-            that.$message.success("删除失败！");
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+            .delete("/ProductionManagement/DeletePPT", {
+              params: {
+                taskid: id,
+              },
+            })
+            .then(function (response) {
+              if (response.data > 0) {
+                that.selecttablelist();
+                that.$message.success("删除成功！");
+              } else {
+                that.$message.success("删除失败！");
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         })
         .catch(() => {
-          that.$message.success("已取消操作！");
+          that.$message.error("已取消操作！");
         });
     },
     //获取下拉列表所需的数据
@@ -421,7 +607,6 @@ export default {
           var month = date.getMonth();
           var day = date.getDate();
           that.addform.productDate = year + "-" + month + "-" + day;
-          alert(that.addform.productDate);
           this.$axios
             .post("/ProductionManagement/AddPPT", that.addform)
             .then(function (response) {
@@ -459,9 +644,7 @@ export default {
           console.log(error);
         });
     },
-    onSubmit() {
-      this.$message.error("还未完成!");
-    }, //生产单号查询
+     //生产单号查询
     onSelect() {
       var that = this;
       var fomatyear = "";
