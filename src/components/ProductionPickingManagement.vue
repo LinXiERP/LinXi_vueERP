@@ -439,7 +439,7 @@ export default {
           { required: true, message: "请输入生产数量", trigger: "change" },
         ],
         commodityId: [
-          { required: true, message: "请输入生产日期", trigger: "change" },
+          { required: true, message: "请选择原材料", trigger: "change" },
         ],
         uses: [{ required: true, message: "请输入领料用途", trigger: "change" }],
         departmentId: [
