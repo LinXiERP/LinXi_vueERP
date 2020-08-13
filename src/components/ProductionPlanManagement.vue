@@ -364,12 +364,6 @@
             </div>
           </el-dialog>
 
-          <el-button
-            type="primary"
-            @click="onSelectALL"
-            icon="el-icon-refresh"
-            style="margin-left:10px;"
-          >刷新</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -688,50 +682,7 @@ export default {
     },
     cellStyleFun() {
       return "text-align:center";
-    }, //刷新
-    onSelectALL() {
-      var that = this;
-      if (
-        that.formInline.taskid != "" ||
-        that.formInline.year != "" ||
-        that.formInline.month != ""
-      ) {
-        var fomatyear = "";
-        if (that.formInline.year != "" && that.formInline.year != null) {
-          var date = new Date(that.formInline.year);
-          fomatyear = date.getFullYear();
-        }
-        this.$axios
-          .get("/ProductionManagement/GetPPT", {
-            params: {
-              year: fomatyear,
-              month: that.formInline.month,
-              id: that.formInline.taskid,
-            },
-          })
-          .then(function (response) {
-            that.tableData = [];
-            for (var i = 0; i < response.data.length; i++) {
-              that.tableData.push(response.data[i]);
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      } else {
-        that.tableData = [];
-        this.$axios
-          .get("/ProductionManagement/GetPPTs")
-          .then(function (response) {
-            for (var i = 0; i < response.data.length; i++) {
-              that.tableData.push(response.data[i]);
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
-    }, //模态框
+    },
   },
 };
 </script>

@@ -237,6 +237,26 @@ const routes = [{
             name: "SalaryManagmentReport",
             component: resolve => require(['../components/SalaryManagmentReport.vue'], resolve)
         }]
+    },
+    {
+        path: "/BasicInformationManagement",
+        name: "BasicInformationManagement",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [
+            {
+            path: "BasicInformationSupplierManagement",
+            name: "BasicInformationSupplierManagement",
+            component: resolve => require(['../components/BasicInformationSupplierManagement.vue'], resolve)
+        },{
+            path: "BasicInformationCommodityManagement",
+            name: "BasicInformationCommodityManagement",
+            component: resolve => require(['../components/BasicInformationCommodityManagement.vue'], resolve)
+        },{
+            path: "BasicInformationProductManagement",
+            name: "BasicInformationProductManagement",
+            component: resolve => require(['../components/BasicInformationProductManagement.vue'], resolve)
+        }
+    ]
     }
 ]
 const router = new VueRouter({

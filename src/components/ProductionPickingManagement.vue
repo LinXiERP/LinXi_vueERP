@@ -366,12 +366,6 @@
               <el-button type="success" @click="Editformsubmit(editform)">确 定</el-button>
             </div>
           </el-dialog>
-          <el-button
-            type="primary"
-            @click="onSelectALL"
-            icon="el-icon-refresh"
-            style="margin-left:10px;"
-          >刷新</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -700,44 +694,7 @@ export default {
     },
     cellStyleFun() {
       return "text-align:center";
-    }, //刷新
-    onSelectALL() {
-      var that = this;
-      if (
-        that.formInline.materialid != "" ||
-        that.formInline.departmentid != ""
-      ) {
-        this.$axios
-        .get("/ProductionManagement/GetPPM", {
-          params: {
-            id: that.formInline.materialid,
-            departmentid: that.formInline.departmentid,
-          },
-        })
-        .then(function (response) {
-          that.tableData = [];
-          for (var i = 0; i < response.data.length; i++) {
-            that.tableData.push(response.data[i]);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      } else {
-        that.tableData = [];
-        this.$axios
-        .get("/ProductionManagement/GetPPMs")
-        .then(function (response) {
-          that.tableData = [];
-          for (var i = 0; i < response.data.length; i++) {
-            that.tableData.push(response.data[i]);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
-    },
+    }, 
   },
 };
 </script>

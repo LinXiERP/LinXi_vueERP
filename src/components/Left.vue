@@ -112,11 +112,7 @@
             <span>销售管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-<<<<<<< Updated upstream
-            <el-menu-item
-=======
             <el-menu-item 
->>>>>>> Stashed changes
               index="6-1"
               @click="GoPath(`/SaleManagement/SaleOrderManagement`)"
             >销售单管理</el-menu-item>
@@ -169,9 +165,9 @@
             <span>基础信息</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item index="10-1">供应商资料</el-menu-item>
-            <el-menu-item index="10-2">商品资料</el-menu-item>
-            <el-menu-item index="10-3">产品资料</el-menu-item>
+            <el-menu-item index="10-1"  @click="GoPath(`/BasicInformationManagement/BasicInformationSupplierManagement`)">供应商资料</el-menu-item>
+            <el-menu-item index="10-2"  @click="GoPath(`/BasicInformationManagement/BasicInformationCommodityManagement`)">原材料资料</el-menu-item>
+            <el-menu-item index="10-3"  @click="GoPath(`/BasicInformationManagement/BasicInformationProductManagement`)">产品资料</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
