@@ -18,6 +18,7 @@
         </el-form-item>
         <el-form-item label="月份">
           <el-select v-model="formInline.month" placeholder="选择月">
+            <el-option label="不限" value=""></el-option>
             <el-option label="1月" value="01"></el-option>
             <el-option label="2月" value="02"></el-option>
             <el-option label="3月" value="03"></el-option>

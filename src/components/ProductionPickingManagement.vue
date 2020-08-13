@@ -14,6 +14,7 @@
         </el-form-item>
         <el-form-item label="领料部门">
           <el-select v-model="formInline.departmentid" placeholder="选择领料部门">
+            <el-option label="所有部门" value></el-option>
             <el-option
               v-for="(item,index) in departments"
               :key="index"
@@ -172,8 +173,6 @@
                   ></el-input>
                 </el-form-item>
               </el-row>
-
-              
 
               <el-row>
                 <el-form-item
@@ -340,8 +339,6 @@
                 </el-form-item>
               </el-row>
 
-              
-
               <el-row>
                 <el-form-item
                   label="计划备注"
@@ -435,7 +432,9 @@ export default {
         commodityId: [
           { required: true, message: "请选择原材料", trigger: "change" },
         ],
-        uses: [{ required: true, message: "请输入领料用途", trigger: "change" }],
+        uses: [
+          { required: true, message: "请输入领料用途", trigger: "change" },
+        ],
         departmentId: [
           { required: true, message: "请选择部门名称", trigger: "change" },
         ],
@@ -451,7 +450,7 @@ export default {
         taskId: "", //计划编号
         commodityId: "", //原材料编号
         nums: "", //领料数量
-        uses: "",//领料用途
+        uses: "", //领料用途
         departmentId: "", //部门编号
         receiptDate: "", //无用字段
         staffId: "", //领料员
@@ -465,7 +464,7 @@ export default {
         taskId: "", //计划编号
         commodityId: "", //原材料编号
         nums: "", //领料数量
-        uses: "",//领料用途
+        uses: "", //领料用途
         departmentId: "", //部门编号
         receiptDate: "", //无用字段
         staffId: "", //领料员
@@ -694,7 +693,7 @@ export default {
     },
     cellStyleFun() {
       return "text-align:center";
-    }, 
+    },
   },
 };
 </script>
