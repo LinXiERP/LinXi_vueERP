@@ -27,9 +27,9 @@ export default {
   components: {
     HelloWorld,
     Top,
-    Left
+    Left,
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

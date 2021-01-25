@@ -143,7 +143,7 @@
             class="form-control-plaintext"
             readonly
             placeholder="实付金额"
-            v-model="PurchaseEditObj.amountWay"
+            v-model="PurchaseEditObj.amountReceived"
             style="margin-right:20px;width:31%"
           />
           <label
@@ -301,7 +301,11 @@ export default {
         `/PurchasingManagement/GetPurchasingByCategoryId?id=${val}`
       );
       ress.entity.purchaseDate = ress.entity.purchaseDate.substring(0, 10);
-
+      ress.entity.nums = 1;
+      ress.entity.amountReceived = 0;
+      ress.entity.amountReceivable = ress.entity.price;
+      ress.entity.amount = ress.entity.price;
+      ress.entity.amountWay = 1;
       this.PurchaseEditObj = ress.entity;
     },
     async BtnSend() {

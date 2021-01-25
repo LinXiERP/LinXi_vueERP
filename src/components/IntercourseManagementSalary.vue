@@ -1,0 +1,191 @@
+<template>
+  <div id="CommodityInventory">
+    <el-row :gutter="20">
+      <el-col :span="6">
+        <!-- <div class="grid-content bg-purple">销售结款</div> -->
+      </el-col>
+      <!-- 查询 -->
+      <el-col
+        :span="15"
+        style="float:right;padding-left:10%"
+      >
+        <!-- 查询 -->
+        <el-form
+          :inline="true"
+          :model="formSearch"
+          class="demo-form-inline"
+        >
+          <el-form-item label="销售编号">
+            <el-input
+              v-model="formSearch.Slno"
+              placeholder="销售编号"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="订单编号">
+            <el-input
+              type="number"
+              v-model.number="formSearch.OrderId"
+              placeholder="订单编号"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item>
+            <el-button
+              type="primary"
+              @click="BtnSearch"
+            >查询</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
+
+      <!-- 表格数据 -->
+      <el-table
+        :data="SLOrderList"
+        stripe
+        height="800"
+        :row-style="{height:50+'px'}"
+        v-loading="loading"
+        style="width: 100%;"
+      >
+        <el-table-column
+          prop="id"
+          label="编号"
+          v-if="false"
+        ></el-table-column>
+
+        <el-table-column
+          prop="no"
+          label="销售单编号"
+        ></el-table-column>
+
+        <el-table-column
+          prop="productName"
+          label="产品名称"
+        ></el-table-column>
+
+        <el-table-column
+          prop="customerName"
+          label="客户名称"
+        ></el-table-column>
+
+        <el-table-column
+          prop="price"
+          label="销售金额(元)"
+        ></el-table-column>
+
+        <el-table-column
+          label="结款日期"
+          prop="deliveryDate"
+        >
+
+        </el-table-column>
+
+      </el-table>
+
+      <!-- 分页 -->
+      <el-row style="text-align:center;float:right;margin-right:6%;margin-top:3%">
+        <div class="block">
+          <el-pagination
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage"
+            :page-size="pageSize"
+            layout="prev, pager, next, jumper"
+            :total="totalNum"
+          ></el-pagination>
+        </div>
+      </el-row>
+
+    </el-row>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      formSearch: {
+        OrderId: 0,
+        Slno: "",
+      },
+      loading: false,
+      // 采购单表格信息
+      SLOrderList: [],
+      activeName: "first",
+      currentPage: 1, //默认显示第一页
+      pageSize: 15, //默认每页显示15条
+      totalNum: 0, //总数量
+    };
+  },
+  methods: {
+    BtnSearch() {
+      var that = this;
+      this.$axios
+        .get(
+          `/IntercourseManagement/GetAllSlSaryOrder?Slno=${this.formSearch.Slno}&OrderId=${this.formSearch.OrderId}`
+        )
+        .then((res) => {
+          if (res.data.entity.length != 0) {
+            res.data.entity.forEach((element) => {
+              element.deliveryDate = element.deliveryDate.substring(0, 10);
+            });
+          }
+          that.SLOrderList = res.data.entity;
+          that.totalNum = Number(res.data.msg);
+        });
+    },
+    handleCurrentChange(val) {
+      var that = this;
+      this.$axios
+        .get(
+          `/PurchasingManagement/PurchaseInfo?pageIndex=${val}&no=${this.formSearch.no}&SearchName=${this.formSearch.SearchName}&CategoryName=${this.formSearch.CategoryName}`
+        )
+        .then((res) => {
+          if (res.data.entity.length != 0) {
+            res.data.entity.forEach((element) => {
+              element.purchaseDate = element.purchaseDate.substring(0, 10);
+            });
+          }
+          that.PurchaseList = res.data.entity;
+          that.totalNum = Number(res.data.msg);
+        });
+    },
+    async loadinfo() {
+      const { data: res } = await this.$axios.get(
+        "/IntercourseManagement/GetAllSlSaryOrder"
+      );
+      this.loading = false;
+      if (res.entity.length != 0) {
+        res.entity.forEach((element) => {
+          element.deliveryDate = element.deliveryDate.substring(0, 10);
+        });
+      }
+      this.SLOrderList = res.entity;
+      this.totalNum = Number(res.msg);
+    },
+  },
+  mounted() {
+    this.loading = true;
+    this.loadinfo();
+  },
+  computed: {
+    noPay() {
+      return (
+        this.PurchaseEditObj.price * this.PurchaseEditObj.nums -
+        this.PurchaseEditObj.amountReceived
+      );
+    },
+  },
+  filters: {
+    timeFilter(val) {
+      return val.substr(0, 10);
+    },
+  },
+  watch: {
+    "formSearch.OrderId"(value, oldval) {
+      if (typeof value != "number" || isNaN(value)) {
+        this.$message.error("请输入合法订单编号!!!");
+        this.formSearch.OrderId = 0;
+      }
+    },
+  },
+};
+</script>

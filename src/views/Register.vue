@@ -1,10 +1,11 @@
 <template>
   <div>
-    <h1>Register</h1>
-    <el-button
-      type="primary"
-      @click="SendGet"
-    >SendGetNoAuthorization</el-button>
+    <img
+      src="../assets/image/background/erp2.jpg"
+      class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+      alt=""
+      style="width:120%;height:120%"
+    >
   </div>
 </template>
 
@@ -13,8 +14,8 @@ export default {
   methods: {
     SendGet() {
       this.$axios.get(`/AcDepartment/GetAC?id=1`);
-    }
-  }
+    },
+  },
 };
 </script>
 

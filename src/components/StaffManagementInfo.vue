@@ -2,9 +2,6 @@
   <div id="StaffManage">
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="员工列表" name="first">
-       
-          
-       
         <el-row>
           <el-input placeholder="请输入内容" v-model="SearchStaff.name"  class="input-with-select">
             <el-select
@@ -14,8 +11,6 @@
               style="width:150px;"
             >
               <el-option label="员工姓名" value="1"></el-option>
-              <el-option label="员工电话" value="2"></el-option>
-              <el-option label="联系人名" value="3"></el-option>
             </el-select>
             <el-button slot="append" icon="el-icon-search" style="width:150px;" @click="SelectStaff"></el-button>
           </el-input>
@@ -25,14 +20,14 @@
           style="width: 100%"
           v-loading="loading"
         >
-          <el-table-column prop="id" label="员工编号" width="120"></el-table-column>
-             <el-table-column prop="name" label="员工名称" width="120"></el-table-column>
-            <el-table-column prop="sexName" label="性别" width="120"></el-table-column>
-              <el-table-column prop="no" label="工号" width="120"></el-table-column>
+          <el-table-column prop="id" label="员工编号"></el-table-column>
+             <el-table-column prop="name" label="员工名称" ></el-table-column>
+            <el-table-column prop="sexName" label="性别"></el-table-column>
+              <el-table-column prop="no" label="工号" ></el-table-column>
           <el-table-column prop="address" label="员工地址"></el-table-column>
             <el-table-column prop="tel" label="电话"></el-table-column>
-          <el-table-column prop="departmentName" label="所属部门" width="100"></el-table-column>
-          <el-table-column prop="statusName" label="状态"></el-table-column>
+          <el-table-column prop="deparmentName" label="所属部门" width="100"></el-table-column>
+          <el-table-column prop="statusStr" label="状态"></el-table-column>
       
           <el-table-column label width="300">
             <template slot-scope="scope">
@@ -69,10 +64,9 @@
               <div
                 class="grid-content bg-purple-dark"
                 style="text-align:center;font-size:25px;margin-bottom:15px;"
-              >添加员工</div>
+              > </div>
             </el-col>
           </el-row>
-
           <el-row>
             <el-col :span="8">
               <el-form-item label="员工姓名">
@@ -81,65 +75,62 @@
             </el-col>
 
             <el-col :span="8">
-              <el-form-item label="邮政编码">
-                <el-input v-model="StaffItem.postcode" placeholder="邮政编码"></el-input>
+              <el-form-item label="性别">
+                 <el-select
+              v-model="StaffItem.sex"
+          
+              placeholder="请选择"
+             style="width:330px"
+            >
+              <el-option label="男" value="1"></el-option>
+              <el-option label="女" value="0"></el-option>
+            </el-select>
               </el-form-item>
             </el-col>
-
+            <el-col :span="8">
+              <el-form-item label="工号">
+                <el-input v-model="StaffItem.no" placeholder="工号"></el-input>
+              </el-form-item>
+            </el-col>
+           
+          </el-row>
+          <el-row>
+             <el-col :span="8">
+              <el-form-item label="联系电话">
+                <el-input v-model="StaffItem.tel" placeholder="联系电话"></el-input>
+              </el-form-item>
+            </el-col>
             <el-col :span="8">
               <el-form-item label="员工地址">
                 <el-input v-model="StaffItem.address" placeholder="员工地址"></el-input>
               </el-form-item>
             </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="联系电话">
-                <el-input v-model="StaffItem.custtel" placeholder="联系电话"></el-input>
-              </el-form-item>
-            </el-col>
 
             <el-col :span="8">
-              <el-form-item label="联系人">
-                <el-input v-model="StaffItem.linkman" placeholder="联系人"></el-input>
-              </el-form-item>
-            </el-col>
+              <el-form-item label="所属部门">
+                  <el-Select style="width:330px" v-model="StaffItem.deparmentName">
+                    <el-Option v-for="item in departmentList" :value="item.name" :key="item.id" >{{
+                        item.name }}
+                    </el-Option>
+                </el-Select>
 
-            <el-col :span="8">
-              <el-form-item label="联系人电话">
-                <el-input v-model="StaffItem.linktel" placeholder="联系人电话"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
-
           <el-row>
-            <el-col :span="8">
-              <el-form-item label="邮箱账号">
-                <el-input v-model="StaffItem.email" placeholder="邮箱账号"></el-input>
+             <el-col :span="8">
+              <el-form-item label="目前状态">
+             <el-select
+              v-model="StaffItem.status"
+          
+              placeholder="请选择"
+             style="width:330px"
+            >
+              <el-option label="正常" value="1"></el-option>
+              <el-option label="冻结" value="0"></el-option>
+            </el-select>
               </el-form-item>
             </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="员工性别">
-                <el-input v-model="StaffItem.sex" placeholder="员工性别"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="员工生日">
-                <el-input v-model="StaffItem.birthday" placeholder="员工生日"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="员工爱好">
-                <el-input v-model="StaffItem.love" placeholder="员工爱好"></el-input>
-              </el-form-item>
-            </el-col>
-
             <el-col :span="8">
               <el-form-item label="备注">
                 <el-input v-model="StaffItem.remark" placeholder="备注"></el-input>
@@ -164,48 +155,48 @@
     <el-dialog title="员工信息" :visible.sync="dialogFormVisible">
    <el-form :model="StaffItem"  >  
        <el-row>
- <el-col span="10">
+ <el-col :span="10">
     <el-form-item  label="员工姓名:"  :label-width="formLabelWidth">
       <el-input v-model="StaffItem.name" autocomplete="off"></el-input>
     </el-form-item>
      </el-col >
-      <el-col span="10">  
+      <el-col :span="10">  
      <el-form-item label="性别:" :label-width="formLabelWidth" >
       <el-input v-model="StaffItem.sexName" autocomplete="off"></el-input>
     </el-form-item>
      </el-col>
     </el-row>
       <el-row>
- <el-col span="10">
+ <el-col :span="10">
     <el-form-item  label="工号:"  :label-width="formLabelWidth">
       <el-input v-model="StaffItem.no" autocomplete="off"></el-input>
     </el-form-item>
      </el-col >
-      <el-col span="10">
+      <el-col :span="10">
      <el-form-item label="员工地址:" :label-width="formLabelWidth" >
       <el-input v-model="StaffItem.address" autocomplete="off"></el-input>
     </el-form-item>
      </el-col>
     </el-row>
     <el-row>
- <el-col span="10">
+ <el-col :span="10">
     <el-form-item  label="电话:"  :label-width="formLabelWidth">
       <el-input v-model="StaffItem.tel" autocomplete="off"></el-input>
     </el-form-item>
      </el-col >
-      <el-col span="10">
-     <el-form-item label="所属部门:" :label-width="formLabelWidth" >
-      <el-input v-model="StaffItem.departmentName" autocomplete="off"></el-input>
+      <el-col :span="10">
+     <el-form-item label="部门:" :label-width="formLabelWidth" >
+      <el-input v-model="StaffItem.deparmentName" autocomplete="off"></el-input>
     </el-form-item>
      </el-col>
     </el-row>
     <el-row>
- <el-col span="10">
+ <el-col :span="10">
     <el-form-item  label="状态:"  :label-width="formLabelWidth">
-      <el-input v-model="StaffItem.statusName" autocomplete="off"></el-input>
+      <el-input v-model="StaffItem.statusStr" autocomplete="off"></el-input>
     </el-form-item>
      </el-col >
-      <el-col span="10">
+      <el-col :span="10">
     </el-col>
     </el-row>
   </el-form>
@@ -249,14 +240,14 @@
      </el-col >
       <el-col span="10">
      <el-form-item label="所属部门:" :label-width="formLabelWidth" >
-      <el-input v-model="StaffItem.departmentName" readonly="true"  autocomplete="off"></el-input>
+      <el-input v-model="StaffItem.deparmentName" readonly="true"  autocomplete="off"></el-input>
     </el-form-item>
      </el-col>
     </el-row>
     <el-row>
  <el-col span="10">
     <el-form-item  label="状态:" style="readonly"  :label-width="formLabelWidth">
-      <el-input v-model="StaffItem.statusName" readonly="true" autocomplete="off"></el-input>
+      <el-input v-model="StaffItem.statusStr" readonly="true" autocomplete="off"></el-input>
     </el-form-item>
      </el-col >
       <el-col span="10">
@@ -275,24 +266,8 @@
 export default {
   data() {
     return { 
+      departmentList:[],
       dialogdetail:false,
-      gridData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
         dialogTableVisible: false,
         dialogFormVisible: false,
         form: {
@@ -312,7 +287,6 @@ export default {
       currentPage: 1, //默认显示第一页
       pageSize: 8, //默认每页显示8条
       totalNum: 0, //总页数
-
       StaffList: [],//员工集合
       SearchStaff: {  //查询员工
         name: "",//要查询的姓名
@@ -323,8 +297,24 @@ export default {
   },
   created() {
     this.SelectAllStaff();//默认进来就加载所有的员工
+    this.GetAllDeparmentInfo();//默认进来就加载所有的部门
   },
   methods: {
+    //获取所有部门信息
+      GetAllDeparmentInfo() {
+      var t = this;
+      this.$axios
+        .get("/AcDepartment/GetAllDeparmentInfo")
+        .then(function(response) {
+          console.log(response.data);
+          t.totalNum = response.data.length;//多少页数据
+          t.departmentList = response.data;//将部门集合给前端
+          t.loading=false;//表格加载完成
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     handleClick(tab, event) {
       console.log(tab, event);
       this.StaffItem={};
@@ -345,48 +335,35 @@ export default {
       this.StaffItem = this.StaffList[index + (this.currentPage - 1) * 8];
     },
     //删除员工
-    DeleteStaff(index, row) {
-      var th = this;
-      var t = this.StaffList[index + (th.currentPage - 1) * 8];
-      console.log(t);
-      //请求删除员工的接口
-
-      this.$confirm("确定要删除员工码?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        .then(() => {
-          this.$axios
-            .delete(
-              "http://localhost:56567/api/StaffManagement/DeleteStaffInfo?id=" +
-                t.id
-            )
-            .then(function(response) {
-              // alert(response.data.code);
-              if (response.data.code === 400) {
-                th.$message.success("删除成功!");
-                th.StaffList.splice(index + (th.currentPage - 1) * 8, 1);
-              } else {
-                th.$message.warn("删除失败!");
-              }
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
+   DeleteStaff(index, row) {
+    
+      var t = this;
+       this.StaffItem = this.StaffList[index + (this.currentPage - 1) * 8];
+      this.$axios
+        .put(
+          "/StaffManagement/DeleteStaff",
+          t.StaffItem
+        )
+        .then(function(response) {
+          if (response.data.code == 200 && response.data.msg=="成功") {
+            t.$message.success("删除成功！");
+            t.SelectAllStaff();
+            t.$options.methods.SelectAllStaff();
+            t.StaffItem = {};
+          } else {
+           t.$message.error(response.data.msg)
+            t.StaffItem = {};
+          }
         })
-        .catch(() => {
-          this.$message({
-            type: "success",
-            message: "已取消删除"
-          });
+        .catch(function(error) {
+          console.log(error);
         });
     },
     //查询所有员工
     SelectAllStaff() {
       var t = this;
       this.$axios
-        .get("http://localhost:56567/api/StaffManagement/GetAllStaffInfo")
+        .get("/StaffManagement/GetAllStaffInfo")
         .then(function(response) {
           console.log(response.data);
           t.totalNum = response.data.length;//多少页数据
@@ -400,19 +377,19 @@ export default {
     //编辑员工信息
     UpdateStaff() {
       var t = this;
-      t.dialogFormVisible = false
+      t.dialogFormVisible=false
       this.$axios
         .put(
-          "http://localhost:56567/api/StaffManagement/UpdateStaffInfo",
+          "/StaffManagement/UpdateStaff",
           t.StaffItem
         )
         .then(function(response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+          if (response.data.code == 200) {
             t.$message.success("更新成功！");
+             this.SelectAllStaff();
             t.StaffItem = {};
           } else {
-            t.$message.warn("更新失败！");
+            t.$message.error("更新失败！");
             t.StaffItem = {};
           }
         })
@@ -420,17 +397,20 @@ export default {
           console.log(error);
         });
     },
+    //添加员工
     AddStaff() {
       var t = this;
       this.$axios
         .post(
-          "http://localhost:56567/api/StaffManagement/AddStaffInfo",
+          "/StaffManagement/AddStaff",
           t.StaffItem
         )
         .then(function(response) {
-          console.log(response.data.code == 400);
-          if (response.data.code == 400) {
+         
+          if (response.data.code == 200) {
             t.$message.success("添加成功！");
+            t.SelectAllStaff();
+            this.activeName="first"
             t.StaffItem = {};
           } else {
             t.$message.warn("添加失败！");
@@ -441,12 +421,13 @@ export default {
           console.log(error);
         });
     },
+    //过滤
     SelectStaff(){
       var t=this;
       console.log(t.SearchStaff.select,t.SearchStaff.name);
       this.$axios
         .get(
-          "http://localhost:56567/api/StaffManagement/SelectStaffInfo?name="+t.SearchStaff.name+"&select="+t.SearchStaff.select
+          "/StaffManagement/SelectAcStaffInfo?name="+t.SearchStaff.name+"&select="+t.SearchStaff.select
         )
         .then(function(response) {
           t.StaffList= response.data;

@@ -1,13 +1,30 @@
 <template>
   <div id="CustomerManageOrder">
-    <el-tabs v-model="activeName" @tab-click="handleClick" type="border-card">
-      <el-tab-pane label="订单列表" name="first">
-        <el-form ref="SearchCustomerOrder" :model="SearchCustomerOrder" label-width="80px">
+    <el-tabs
+      v-model="activeName"
+      @tab-click="handleClick"
+      type="border-card"
+    >
+      <el-tab-pane
+        label="订单列表"
+        name="first"
+      >
+        <el-form
+          ref="SearchCustomerOrder"
+          :model="SearchCustomerOrder"
+          label-width="80px"
+        >
           <el-row>
             <el-col :span="6">
               <el-form-item label="所有产品">
-                <el-select v-model="SearchCustomerOrder.product" placeholder="请选择产品">
-                  <el-option label="所有" value="所有"></el-option>
+                <el-select
+                  v-model="SearchCustomerOrder.product"
+                  placeholder="请选择产品"
+                >
+                  <el-option
+                    label="所有"
+                    value="所有"
+                  ></el-option>
                   <el-option
                     :label="i.productName"
                     :value="i.productName"
@@ -18,22 +35,47 @@
               </el-form-item>
             </el-col>
             <el-col :span="8">
-              <el-input placeholder="订单编号" v-model="SearchCustomerOrder.id"></el-input>
+              <el-input
+                placeholder="订单编号"
+                v-model="SearchCustomerOrder.id"
+              ></el-input>
             </el-col>
             <el-col :span="6">
               <el-form-item label="状态">
                 <el-select v-model="SearchCustomerOrder.status">
-                  <el-option label="所有" value="-100"></el-option>
-                  <el-option label="待审核" value="0"></el-option>
-                  <el-option label="已审核" value="1"></el-option>
-                  <el-option label="待发货" value="2"></el-option>
-                  <el-option label="已出库" value="3"></el-option>
-                  <el-option label="审核不通过" value="-1"></el-option>
+                  <el-option
+                    label="所有"
+                    value="-100"
+                  ></el-option>
+                  <el-option
+                    label="待审核"
+                    value="0"
+                  ></el-option>
+                  <el-option
+                    label="已审核"
+                    value="1"
+                  ></el-option>
+                  <el-option
+                    label="待发货"
+                    value="2"
+                  ></el-option>
+                  <el-option
+                    label="已出库"
+                    value="3"
+                  ></el-option>
+                  <el-option
+                    label="审核不通过"
+                    value="-1"
+                  ></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="4">
-              <el-button type="primary" icon="el-icon-search" @click="SelectCustomerOrder">搜索</el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-search"
+                @click="SelectCustomerOrder"
+              >搜索</el-button>
             </el-col>
             <!-- <el-button
               slot="append"
@@ -49,18 +91,51 @@
           style="width: 100%"
           v-loading="loading"
         >
-          <el-table-column prop="id" label="编号"></el-table-column>
-          <el-table-column prop="no" label="订单编号"></el-table-column>
-          <el-table-column prop="customerName" label="下单客户"></el-table-column>
-          <el-table-column prop="productName" label="产品名称"></el-table-column>
-          <el-table-column prop="nums" label="订单数量"></el-table-column>
-          <el-table-column prop="nums" label="订单金额"></el-table-column>
-          <el-table-column prop="status" label="状态"></el-table-column>
-          <el-table-column label="操作" width="300">
+          <el-table-column
+            prop="id"
+            label="编号"
+          ></el-table-column>
+          <el-table-column
+            prop="no"
+            label="订单编号"
+          ></el-table-column>
+          <el-table-column
+            prop="customerName"
+            label="下单客户"
+          ></el-table-column>
+          <el-table-column
+            prop="productName"
+            label="产品名称"
+          ></el-table-column>
+          <el-table-column
+            prop="nums"
+            label="订单数量"
+          ></el-table-column>
+          <el-table-column
+            prop="nums"
+            label="订单金额"
+          ></el-table-column>
+          <el-table-column
+            prop="status"
+            label="状态"
+          ></el-table-column>
+          <el-table-column
+            label="操作"
+            width="300"
+          >
             <template slot-scope="scope">
-              <el-button type="primary" @click="ToEditCustomerOrder(scope.$index, scope.row)">编辑</el-button>
-              <el-button type="danger" @click="DeleteCustomerOrder(scope.$index, scope.row)">删除</el-button>
-              <el-button type="primary" @click="TodetailCustomerOrder(scope.$index, scope.row)">详情</el-button>
+              <el-button
+                type="primary"
+                @click="ToEditCustomerOrder(scope.$index, scope.row)"
+              >编辑</el-button>
+              <el-button
+                type="danger"
+                @click="DeleteCustomerOrder(scope.$index, scope.row)"
+              >删除</el-button>
+              <el-button
+                type="primary"
+                @click="TodetailCustomerOrder(scope.$index, scope.row)"
+              >详情</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -78,8 +153,17 @@
         </el-row>
       </el-tab-pane>
 
-      <el-tab-pane label="编辑订单" name="second" disabled>
-        <el-form ref="Customer" :model="CustomerOrderItem" label-width="90px" size="medium">
+      <el-tab-pane
+        label="编辑订单"
+        name="second"
+        disabled
+      >
+        <el-form
+          ref="Customer"
+          :model="CustomerOrderItem"
+          label-width="90px"
+          size="medium"
+        >
           <el-row>
             <el-col :span="24">
               <div
@@ -162,7 +246,10 @@
 
             <el-col :span="8">
               <el-form-item label="交货方式">
-                <el-input v-model="CustomerOrderItem.deliveryWay" placeholder="交货方式"></el-input>
+                <el-input
+                  v-model="CustomerOrderItem.deliveryWay"
+                  placeholder="交货方式"
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -177,15 +264,26 @@
                 >修改</el-button>
               </el-col>
               <el-col :span="10">
-                <el-button type="warning" style="width:90%;height:50px;">重置</el-button>
+                <el-button
+                  type="warning"
+                  style="width:90%;height:50px;"
+                >重置</el-button>
               </el-col>
             </el-form-item>
           </el-row>
         </el-form>
       </el-tab-pane>
 
-      <el-tab-pane label="订单详情" name="third">
-        <el-form ref="Customer" :model="CustomerOrderItem" label-width="90px" size="medium">
+      <el-tab-pane
+        label="订单详情"
+        name="third"
+      >
+        <el-form
+          ref="Customer"
+          :model="CustomerOrderItem"
+          label-width="90px"
+          size="medium"
+        >
           <el-row>
             <el-col :span="24">
               <div
@@ -198,13 +296,19 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="客户姓名">
-                <el-input :value="CustomerOrderItem.customerName" readonly></el-input> 
+                <el-input
+                  :value="CustomerOrderItem.customerName"
+                  readonly
+                ></el-input>
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="产品名称">
-                   <el-input :value="CustomerOrderItem.productName" readonly></el-input>
+                <el-input
+                  :value="CustomerOrderItem.productName"
+                  readonly
+                ></el-input>
               </el-form-item>
             </el-col>
 
@@ -238,15 +342,27 @@
 
             <el-col :span="8">
               <el-form-item label="交货方式">
-                <el-input v-model="CustomerOrderItem.deliveryWay" placeholder="交货方式" readonly></el-input>
+                <el-input
+                  v-model="CustomerOrderItem.deliveryWay"
+                  placeholder="交货方式"
+                  readonly
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
       </el-tab-pane>
 
-      <el-tab-pane label="添加订单" name="fourth">
-        <el-form ref="Customer" :model="CustomerOrderItem" label-width="90px" size="medium">
+      <el-tab-pane
+        label="添加订单"
+        name="fourth"
+      >
+        <el-form
+          ref="Customer"
+          :model="CustomerOrderItem"
+          label-width="90px"
+          size="medium"
+        >
           <el-row>
             <el-col :span="24">
               <div
@@ -332,7 +448,10 @@
 
             <el-col :span="8">
               <el-form-item label="交货方式">
-                <el-input v-model="CustomerOrderItem.deliveryWay" placeholder="交货方式"></el-input>
+                <el-input
+                  v-model="CustomerOrderItem.deliveryWay"
+                  placeholder="交货方式"
+                ></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -347,7 +466,10 @@
                 >提交</el-button>
               </el-col>
               <el-col :span="10">
-                <el-button type="warning" style="width:90%;height:50px;">重置</el-button>
+                <el-button
+                  type="warning"
+                  style="width:90%;height:50px;"
+                >重置</el-button>
               </el-col>
             </el-form-item>
           </el-row>
@@ -386,7 +508,7 @@ export default {
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
-      this.CustomerOrderItem = {}; 
+      this.CustomerOrderItem = {};
       // if(tab.name=="second"){
       //   activeName="first";
       //   return;
@@ -412,7 +534,7 @@ export default {
       console.log(`当前页: ${val}`);
     },
     ToEditCustomerOrder(index, row) {
-      var t=this;
+      var t = this;
       this.CustomerOrderItem = this.CustomerOrderList[
         index + (this.currentPage - 1) * 8
       ];

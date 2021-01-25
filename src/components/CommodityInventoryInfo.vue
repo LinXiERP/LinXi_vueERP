@@ -1,10 +1,11 @@
 <template>
   <div id="CommodityInventory">
     <el-row :gutter="20">
-      <el-col :span="6">
-        <div class="grid-content bg-purple">商品库存管理</div>
+      <el-col :span="14">
+        <el-button type="primary" round @click="DeleteCommodity()">删除</el-button>
       </el-col>
-      <el-col :span="12">
+
+      <el-col :span="10">
         <el-form :inline="true" :model="formInline" class="demo-form-inline">
           <el-form-item label="商品名称">
             <el-input v-model="SearchCommodity.name" placeholder="商品名称"></el-input>
@@ -25,19 +26,12 @@
         </el-form>
       </el-col>
 
-      <el-col :span="3">
-        <button class="grid-content bg-purple btn btn-primary" @click="DeleteCommodity()">删除</button>
-      </el-col>
-      <el-col :span="3">
-        <span class="grid-content bg-purple btn btn-primary">刷新</span>
-      </el-col>
-
       <el-table
         :data="CommodityList.slice((currentPage-1)*pageSize,currentPage*pageSize)"
         style="width: 100%"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column prop="id" label="id " width="80" type="selection"></el-table-column>
+        <el-table-column label="id " width="80" type="selection"></el-table-column>
         <el-table-column prop="id" label="编号" width="180"></el-table-column>
         <el-table-column prop="name" label="商品名称" width="180"></el-table-column>
         <el-table-column prop="price" label="商品单价"></el-table-column>
@@ -47,7 +41,7 @@
         <el-table-column prop="icategory_name" label="类别"></el-table-column>
         <el-table-column prop="address" label="详细" scope="scope">
           <template slot-scope="scope">
-            <el-button type="text" @click="editShow(scope.$index)">查看详情</el-button>
+            <el-button type="success" icon="el-icon-search" @click="editShow(scope.$index)">查看详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -77,7 +71,6 @@
       <el-divider></el-divider>
       <span>商品规格：{{Commodity.spec}}</span>
       <el-divider></el-divider>
-
       <span>批准文号：{{Commodity.license_no}}</span>
       <el-divider></el-divider>
       <span>供应商：{{Commodity.supplie_name}}</span>
@@ -146,9 +139,12 @@ export default {
 
       CommodityIds: [],
 
+      //入库单
+      Commodityrecord: {},
+
       activeName: "first",
       select: "",
-      CustomerItem: {},
+      CommodityItem: {},
       currentPage: 1, //默认显示第一页
       pageSize: 8, //默认每页显示8条
       totalNum: 0, //总页数
@@ -172,12 +168,13 @@ export default {
     GetPuCommodityInfo() {
       this.$axios.get(`/CommodityInventory/GetPuCommodityInfo`).then((res) => {
         this.CommodityList = res.data;
+        this.totalNum = res.data.length;
       });
     },
 
     //商品类型
     GetCategoryInfo() {
-      this.$axios.get(`/CommodityInventory/GetPuCommodityInfo`).then((res) => {
+      this.$axios.get(`/CommodityInventory/GetCategoryInfo`).then((res) => {
         this.CategoryInfo = res.data;
       });
     },
@@ -188,7 +185,8 @@ export default {
         .delete(`/CommodityInventory/DeleteCommodity`, {
           data: this.CommodityIds,
         })
-        .then((res) => alert(res.messageModel.Msg));
+
+        .then((res) => alert(res.data.msg), this.GetPuCommodityInfo());
     },
 
     // 查找
@@ -202,15 +200,18 @@ export default {
             category: this.SearchCommodity.category_id,
           },
         })
-        .then((res) => (this.CommodityList = res.data));
+        .then((res) => {
+          this.CommodityList = res.data;
+        });
     },
 
     //多选
     handleSelectionChange(val) {
+      this.CommodityIds = [];
       val.forEach((element) => {
-        console.log(element.id);
         this.CommodityIds.push(element.id);
       });
+      console.log(this.CommodityIds);
     },
 
     handleSizeChange(val) {
@@ -219,12 +220,23 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
     },
+
     ToEditCustomer(index, row) {
-      this.CustomerItem = this.CustomerList[index + (this.currentPage - 1) * 8];
+      this.CustomerItem = this.CommodityList[
+        index + (this.currentPage - 1) * 8
+      ];
       this.activeName = "second";
     },
+    TodetailCustomer(index, row) {
+      this.CommodityRecordItem = this.CommodityRecords[
+        index + (this.currentPage - 1) * 8
+      ];
+      this.activeName = "third";
+    },
 
+    //弹框
     editShow(index) {
+      index = index + (this.currentPage - 1) * 8;
       this.Commodity = this.CommodityList[index];
       console.log(index);
       this.dialogVisible = true;

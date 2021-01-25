@@ -91,48 +91,53 @@ export default {
     return {
       form: {
         name: "",
-        password: ""
+        password: "",
       },
       rules: {
         password: [
           {
             required: true,
             message: "请输入密码",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         name: [
           {
             required: true,
             message: "请输入账号",
-            trigger: "blur"
-          }
-        ]
-      }
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
           let that = this;
-          this.$axios
-            .post(`/Login/LoginCheck`, {
-              Name: this.form.name,
-              Password: md5(`${this.form.password}Auto`)
-            })
-            .then(res => {
-              if (res.data.success == false) {
-                console.log(1);
-                that.$message.error(res.data.msg);
-              } else {
+          this.$axios({
+            url: `http://localhost:9999/IdentityServer/Login`,
+            method: "post",
+            data: `client_id=client2&client_secret=secret&grant_type=password&username=${
+              this.form.name
+            }&password=${md5(`${this.form.password}Auto`)}`,
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          })
+            .then((res) => {
+              if (res.data.access_token.length != 0) {
                 that.$message.success("登录成功!");
-                //设置token
-                sessionStorage.setItem("token", res.data.msg);
-                //设置用户名
-                sessionStorage.setItem("name", res.data.entity.name);
+                sessionStorage.setItem("token", res.data.access_token);
+                sessionStorage.setItem("name", that.form.name);
                 that.$router.push("/Home");
+              } else {
+                that.$message.error("账号密码不匹配!");
               }
+            })
+            .catch((error) => {
+              that.$message.error("账号密码不匹配!");
             });
         } else {
           this.$message.warn("您输入有误哦！");
@@ -142,9 +147,9 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    }
+    },
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 
