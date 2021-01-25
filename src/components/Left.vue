@@ -24,6 +24,7 @@
               index="1-2"
               @click="GoPath(`/StaffManagement/StaffManagementInfo`)"
             >人事管理</el-menu-item>
+<<<<<<< HEAD
             <el-menu-item
               index="1-3"
               @click="GoPath(`/Salary/SalaryManagementWait`)"
@@ -37,6 +38,16 @@
               index="1-5"
               @click="GoPath(`/Salary/SalaryManagmentReport`)"
             >薪资报表</el-menu-item>-->
+=======
+            <el-menu-item index="1-3">待定薪资</el-menu-item>
+            <el-menu-item index="1-4">薪资维护</el-menu-item>
+            <el-menu-item index="1-5">薪资管理</el-menu-item>
+            <el-menu-item index="1-1"  @click="GoPath(`/Notice/NoticeInfo`)">企业公告</el-menu-item>
+            <el-menu-item index="1-2"  @click="GoPath(`/StaffManagement/StaffManagementInfo`)">人事管理</el-menu-item>
+            <el-menu-item index="1-3"  @click="GoPath(`/Salary/SalaryManagementWait`)">待定薪资</el-menu-item>
+            <el-menu-item index="1-4"  @click="GoPath(`/Salary/SalaryManagmentDefend`)">薪资维护</el-menu-item>
+            <el-menu-item index="1-5" @click="GoPath(`/Salary/SalaryManagmentReport`)">薪资报表</el-menu-item>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
           </el-menu-item-group>
         </el-submenu>
 
@@ -75,10 +86,14 @@
               index="3-2"
               @click="GoPath(`/Customermanage/CustomermanageOrder`)"
             >订单管理</el-menu-item>
+<<<<<<< HEAD
             <el-menu-item
               index="3-3"
               @click="GoPath('/Customermanage/CustomerManageOrderTrace')"
             >订单跟踪</el-menu-item>
+=======
+            <el-menu-item index="3-3" @click="GoPath('/Customermanage/CustomerManageOrderTrace')">订单跟踪</el-menu-item>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
           </el-menu-item-group>
         </el-submenu>
 
@@ -138,7 +153,7 @@
             <span>销售管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
-            <el-menu-item
+            <el-menu-item 
               index="6-1"
               @click="GoPath(`/SaleManagement/SaleOrderManagement`)"
             >销售单管理</el-menu-item>
@@ -213,6 +228,7 @@
             <span>质量管理</span>
           </template>
           <el-menu-item-group style="text-align:center">
+<<<<<<< HEAD
             <el-menu-item
               index="9-1"
               @click="GoPath(`/QualityManagement/QualityCommodity`)"
@@ -229,6 +245,12 @@
               index="9-4"
               @click="GoPath(`/QualityManagement/ProductInfo`)"
             >产品质检单</el-menu-item>
+=======
+            <el-menu-item index="9-1" @click="GoPath(`/QualityManagement/QualityCommodity`)">待检商品</el-menu-item>
+            <el-menu-item index="9-2" @click="GoPath(`/QualityManagement/CommodityInfo`)">商品质检单</el-menu-item>
+            <el-menu-item index="9-3" @click="GoPath(`/QualityManagement/QualityProduct`)">待检产品</el-menu-item>
+            <el-menu-item index="9-4" @click="GoPath(`/QualityManagement/ProductInfo`)">产品质检单</el-menu-item>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
           </el-menu-item-group>
         </el-submenu>
 
@@ -238,6 +260,7 @@
             <span>基础信息</span>
           </template>
           <el-menu-item-group style="text-align:center">
+<<<<<<< HEAD
             <el-menu-item
               index="10-1"
               @click="GoPath(`/BasicInformationManagement/BasicInformationSupplierManagement`)"
@@ -250,6 +273,11 @@
               index="10-3"
               @click="GoPath(`/BasicInformationManagement/BasicInformationProductManagement`)"
             >产品资料</el-menu-item>
+=======
+            <el-menu-item index="10-1"  @click="GoPath(`/BasicInformationManagement/BasicInformationSupplierManagement`)">供应商资料</el-menu-item>
+            <el-menu-item index="10-2"  @click="GoPath(`/BasicInformationManagement/BasicInformationCommodityManagement`)">原材料资料</el-menu-item>
+            <el-menu-item index="10-3"  @click="GoPath(`/BasicInformationManagement/BasicInformationProductManagement`)">产品资料</el-menu-item>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
           </el-menu-item-group>
         </el-submenu>
 

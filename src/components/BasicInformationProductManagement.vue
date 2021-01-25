@@ -224,7 +224,10 @@
                     onkeyup="this.value = this.value.replace(/[^\d]/g,'');"
                     placeholder="产品编号"
                     v-model="editform.id"
+<<<<<<< HEAD
                     readonly=""
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                     autocomplete="off"
                     style="width:400px;margin-left:-70px"
                   ></el-input>
@@ -410,7 +413,10 @@
     <el-table
       :data="tableData"
       border
+<<<<<<< HEAD
       v-loading = "loading"
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       style="width: 100%"
       :header-cell-style="thStyleFun"
       :cell-style="cellStyleFun"
@@ -438,7 +444,10 @@
 export default {
   data() {
     return {
+<<<<<<< HEAD
       loading:false,
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       categorys: [],
       suppliers: [],
       //查询内容
@@ -506,7 +515,10 @@ export default {
     };
   },
   mounted() {
+<<<<<<< HEAD
     this.loading=true;
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
     var that = this;
     this.$axios
       .get("/BasicInformationManagement/GetPPs")
@@ -515,7 +527,10 @@ export default {
         for (var i = 0; i < response.data.length; i++) {
           that.tableData.push(response.data[i]);
         }
+<<<<<<< HEAD
         that.loading=false;
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       })
       .catch(function (error) {
         console.log(error);

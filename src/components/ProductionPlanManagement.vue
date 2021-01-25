@@ -409,7 +409,10 @@
 export default {
   data() {
     return {
+<<<<<<< HEAD
        loading: false,
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       slorder: [], //订单编号
       products: [], //产品编号
       departments: [], //部门编号
@@ -476,7 +479,10 @@ export default {
     };
   },
   mounted() {
+<<<<<<< HEAD
     this.loading=true;
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
     var that = this;
     this.$axios
       .get("/ProductionManagement/GetPPTs")
@@ -484,7 +490,10 @@ export default {
         for (var i = 0; i < response.data.length; i++) {
           that.tableData.push(response.data[i]);
         }
+<<<<<<< HEAD
         that.loading=false;
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       })
       .catch(function (error) {
         console.log(error);

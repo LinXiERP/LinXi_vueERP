@@ -10,11 +10,15 @@
         name="first"
       >
         <el-row>
+<<<<<<< HEAD
           <el-input
             placeholder="请输入内容"
             v-model="SearchCustomer.name"
             class="input-with-select"
           >
+=======
+          <el-input placeholder="请输入内容" v-model="SearchCustomer.name" class="input-with-select">
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
             <el-select
               v-model="SearchCustomer.select"
               slot="prepend"
@@ -47,6 +51,7 @@
           style="width: 100%"
           v-loading="loading"
         >
+<<<<<<< HEAD
           <el-table-column
             prop="id"
             label="客户编号"
@@ -83,19 +88,20 @@
             label
             width="300"
           >
+=======
+          <el-table-column prop="id" label="客户编号" width="120"></el-table-column>
+          <el-table-column prop="name" label="客户名称" width="120"></el-table-column>
+          <el-table-column prop="address" label="客户地址"></el-table-column>
+          <el-table-column prop="custtel" label="电话"></el-table-column>
+          <el-table-column prop="linkman" label="联系人" width="100"></el-table-column>
+          <el-table-column prop="email" label="email"></el-table-column>
+          <el-table-column prop="linktel" label="联系人电话" width="120"></el-table-column>
+          <el-table-column label width="300">
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
             <template slot-scope="scope">
-              <el-button
-                type="primary"
-                @click="ToEditCustomer(scope.$index, scope.row)"
-              >编辑</el-button>
-              <el-button
-                type="danger"
-                @click="DeleteCustomer(scope.$index, scope.row)"
-              >删除</el-button>
-              <el-button
-                type="primary"
-                @click="TodetailCustomer(scope.$index, scope.row)"
-              >详情</el-button>
+              <el-button type="primary" @click="ToEditCustomer(scope.$index, scope.row)">编辑</el-button>
+              <el-button type="danger" @click="DeleteCustomer(scope.$index, scope.row)">删除</el-button>
+              <el-button type="primary" @click="TodetailCustomer(scope.$index, scope.row)">详情</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -203,6 +209,7 @@
             <el-col :span="8">
               <el-form-item label="客户性别">
                 <!-- <el-input v-model="CustomerItem.sex" placeholder="客户性别"></el-input> -->
+<<<<<<< HEAD
                 <el-select
                   v-model="CustomerItem.sex"
                   placeholder="客户性别"
@@ -217,6 +224,11 @@
                     :value="2"
                     :key="2"
                   ></el-option>
+=======
+                <el-select v-model="CustomerItem.sex" placeholder="客户性别">
+                  <el-option label="男" :value="1" :key="1"></el-option>
+                  <el-option label="女" :value="2" :key="2"></el-option>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-select>
               </el-form-item>
             </el-col>
@@ -224,7 +236,11 @@
             <el-col :span="8">
               <el-form-item label="客户生日">
                 <!-- <el-input v-model="CustomerItem.birthday" placeholder="客户生日"></el-input> -->
+<<<<<<< HEAD
                 <el-date-picker
+=======
+                      <el-date-picker
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                   v-model="CustomerItem.birthday"
                   type="date"
                   placeholder="交货日期"
@@ -276,6 +292,7 @@
         </el-form>
       </el-tab-pane>
 
+<<<<<<< HEAD
       <el-tab-pane
         label="客户详情"
         name="third"
@@ -286,6 +303,10 @@
           label-width="90px"
           size="medium"
         >
+=======
+      <el-tab-pane label="客户详情" name="third">
+        <el-form ref="Customer" :model="CustomerItem" label-width="90px" size="medium">
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
           <el-row>
             <el-col :span="24">
               <div
@@ -298,31 +319,43 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="客户姓名">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.name"
                   readonly
                   placeholder="客户姓名"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.name" readonly placeholder="客户姓名"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="邮政编码">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.postcode"
                   readonly
                   placeholder="邮政编码"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.postcode" readonly placeholder="邮政编码"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="客户地址">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.address"
                   readonly
                   placeholder="客户地址"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.address" readonly placeholder="客户地址"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
           </el-row>
@@ -330,31 +363,43 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="联系电话">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.custtel"
                   readonly
                   placeholder="联系电话"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.custtel" readonly placeholder="联系电话"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="联系人">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.linkman"
                   readonly
                   placeholder="联系人"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.linkman" readonly placeholder="联系人"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="联系人电话">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.linktel"
                   readonly
                   placeholder="联系人电话"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.linktel" readonly placeholder="联系人电话"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
           </el-row>
@@ -362,17 +407,22 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="邮箱账号">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.email"
                   readonly
                   placeholder="邮箱账号"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.email" readonly placeholder="邮箱账号"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="客户性别">
                 <!-- <span>{{CustomerItem.sex==1?"男":"女"}}</span> -->
+<<<<<<< HEAD
                 <el-input
                   v-if="CustomerItem.sex==null"
                   value=""
@@ -385,16 +435,24 @@
                   readonly
                   placeholder="客户性别"
                 ></el-input>
+=======
+                 <el-input v-if="CustomerItem.sex==null" value="" readonly placeholder="客户性别"></el-input>
+                <el-input v-else :value="CustomerItem.sex==1?'男':'女'" readonly placeholder="客户性别"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="客户生日">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.birthday"
                   readonly
                   placeholder="客户生日"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.birthday" readonly placeholder="客户生日"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
           </el-row>
@@ -402,27 +460,36 @@
           <el-row>
             <el-col :span="8">
               <el-form-item label="客户爱好">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.love"
                   readonly
                   placeholder="客户爱好"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.love" readonly placeholder="客户爱好"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
 
             <el-col :span="8">
               <el-form-item label="备注">
+<<<<<<< HEAD
                 <el-input
                   v-model="CustomerItem.remark"
                   readonly
                   placeholder="备注"
                 ></el-input>
+=======
+                <el-input v-model="CustomerItem.remark" readonly placeholder="备注"></el-input>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
       </el-tab-pane>
 
+<<<<<<< HEAD
       <el-tab-pane
         label="添加客户"
         name="fourth"
@@ -433,6 +500,10 @@
           label-width="90px"
           size="medium"
         >
+=======
+      <el-tab-pane label="添加客户" name="fourth">
+        <el-form ref="Customer" :model="CustomerItem" label-width="90px" size="medium">
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
           <el-row>
             <el-col :span="24">
               <div
@@ -513,6 +584,7 @@
             <el-col :span="8">
               <el-form-item label="客户性别">
                 <!-- <el-input v-model="CustomerItem.sex" placeholder="客户性别"></el-input> -->
+<<<<<<< HEAD
                 <el-select
                   v-model="CustomerItem.sex"
                   placeholder="客户性别"
@@ -527,6 +599,11 @@
                     :value="2"
                     :key="2"
                   ></el-option>
+=======
+                 <el-select v-model="CustomerItem.sex" placeholder="客户性别">
+                  <el-option label="男" :value="1" :key="1"></el-option>
+                  <el-option label="女" :value="2" :key="2"></el-option>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-select>
               </el-form-item>
             </el-col>
@@ -535,7 +612,11 @@
               <el-form-item label="客户生日">
                 <!-- <el-input v-model="CustomerItem.birthday" placeholder="客户生日"></el-input> -->
 
+<<<<<<< HEAD
                 <el-date-picker
+=======
+                    <el-date-picker
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                   v-model="CustomerItem.birthday"
                   type="date"
                   placeholder="交货日期"

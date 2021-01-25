@@ -60,6 +60,7 @@ const routes = [{
         name: "CommodityInventory",
         component: resolve => require(['../views/Home.vue'], resolve),
         children: [{
+<<<<<<< HEAD
                 path: "InPuOrderInfo",
                 name: "InPuOrderInfo",
                 component: resolve => require(['../components/InPuOrderInfo.vue'], resolve)
@@ -84,6 +85,20 @@ const routes = [{
             },
 
         ]
+=======
+            path: "CommodityInventoryInfo",
+            name: "CommodityInventoryInfo",
+            component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
+        }, {
+            path: "PuOrderInfo",
+            name: "PuOrderInfo",
+            component: resolve => require(['../components/PuOrderInfo.vue'], resolve)
+        }, {
+            path: "CommodityInventoryInfo",
+            name: "CommodityInventoryInfo",
+            component: resolve => require(['../components/CommodityInventoryInfo.vue'], resolve)
+        }]
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
 
     },
     {
@@ -130,6 +145,31 @@ const routes = [{
     {
         path: "/QualityManagement",
         name: "QualityManagement",
+<<<<<<< HEAD
+=======
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "QualityProduct",
+            name: "QualityProduct",
+            component: resolve => require(['../components/QualityProduct.vue'], resolve)
+        },{
+            path: "ProductInfo",
+            name: "ProductInfo",
+            component: resolve => require(['../components/ProductInfo.vue'], resolve)
+        },{
+            path: "QualityCommodity",
+            name: "QualityCommodity",
+            component: resolve => require(['../components/QualityCommodity.vue'], resolve)
+        },{
+            path: "CommodityInfo",
+            name: "CommodityInfo",
+            component: resolve => require(['../components/CommodityInfo.vue'], resolve)
+        }]
+    },
+    {
+        path: "/StaffManagement",
+        name: "StaffManagement",
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
         component: resolve => require(['../views/Home.vue'], resolve),
         children: [{
             path: "QualityProduct",
@@ -162,16 +202,24 @@ const routes = [{
             name: "NoticeManageInfo",
             component: resolve => require(['../components/NoticeManageInfo.vue'], resolve)
         }]
-    }, {
-        path: "/PurchaseManagement",
-        name: "PurchaseManagement",
+    },
+    {
+        path: "/Salary",
+        name: "Salary",
         component: resolve => require(['../views/Home.vue'], resolve),
         children: [{
-            path: "PurchaseEdit",
-            name: "PurchaseEdit",
-            component: resolve => require(['../components/Purchasing.vue'], resolve)
+            path: "SalaryManagmentDefend",
+            name: "SalaryManagmentDefend",
+            component: resolve => require(['../components/SalaryManagmentDefend.vue'], resolve)
         }, {
-            path: "Statistics",
+            path: "SalaryManagmentReport",
+            name: "SalaryManagmentReport",
+            component: resolve => require(['../components/SalaryManagmentReport.vue'], resolve)
+        }, {
+            path: "SalaryManagementWait",
+            name: "SalaryManagementWait",
+            component: resolve => require(['../components/SalaryManagementWait.vue'], resolve)
+        },{path: "Statistics",
             name: "Statistics",
             component: resolve => require(['../components/PurchasingStatistics.vue'], resolve)
         }, {
@@ -207,7 +255,20 @@ const routes = [{
             component: resolve => require(['../components/StaffManagementInfo.vue'], resolve)
         }]
     },
+<<<<<<< HEAD
 
+=======
+    {
+        path: "/Notice",
+        name: "Notice",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "Noticeinfo",
+            name: "Noticeinfo",
+            component: resolve => require(['../components/NoticeInfo.vue'], resolve)
+        }]
+    },
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
     {
         path: "/Salary",
         name: "Salary",
@@ -216,6 +277,7 @@ const routes = [{
             path: "SalaryManagementWait",
             name: "SalaryManagementWait",
             component: resolve => require(['../components/SalaryManagementWait.vue'], resolve)
+<<<<<<< HEAD
         }, {
             path: "SalaryManagmentDefend",
             name: "SalaryManagmentDefend",
@@ -248,12 +310,35 @@ const routes = [{
             path: "PurchasingSend",
             name: "PurchasingSend",
             component: resolve => require(['../components/IntercoursePurchasingSend.vue'], resolve)
+=======
+        }]
+    },
+    {
+        path: "/Salary",
+        name: "Salary",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "SalaryManagmentDefend",
+            name: "SalaryManagmentDefend",
+            component: resolve => require(['../components/SalaryManagmentDefend.vue'], resolve)
+        }]
+    },
+    {
+        path: "/Salary",
+        name: "Salary",
+        component: resolve => require(['../views/Home.vue'], resolve),
+        children: [{
+            path: "SalaryManagmentReport",
+            name: "SalaryManagmentReport",
+            component: resolve => require(['../components/SalaryManagmentReport.vue'], resolve)
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
         }]
     },
     {
         path: "/BasicInformationManagement",
         name: "BasicInformationManagement",
         component: resolve => require(['../views/Home.vue'], resolve),
+<<<<<<< HEAD
         children: [{
             path: "BasicInformationSupplierManagement",
             name: "BasicInformationSupplierManagement",
@@ -357,6 +442,24 @@ const routes = [{
         }]
 
     },
+=======
+        children: [
+            {
+            path: "BasicInformationSupplierManagement",
+            name: "BasicInformationSupplierManagement",
+            component: resolve => require(['../components/BasicInformationSupplierManagement.vue'], resolve)
+        },{
+            path: "BasicInformationCommodityManagement",
+            name: "BasicInformationCommodityManagement",
+            component: resolve => require(['../components/BasicInformationCommodityManagement.vue'], resolve)
+        },{
+            path: "BasicInformationProductManagement",
+            name: "BasicInformationProductManagement",
+            component: resolve => require(['../components/BasicInformationProductManagement.vue'], resolve)
+        }
+    ]
+    }
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
 ]
 const router = new VueRouter({
     routes,

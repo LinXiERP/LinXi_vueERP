@@ -394,7 +394,10 @@
       :data="tableData"
       border
       style="width: 100%"
+<<<<<<< HEAD
       v-loading="loading"
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       :header-cell-style="thStyleFun"
       :cell-style="cellStyleFun"
     >
@@ -425,7 +428,10 @@
 export default {
   data() {
     return {
+<<<<<<< HEAD
       loading:false,
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       //查询内容
       formInline: {
         name: "",
@@ -488,14 +494,20 @@ export default {
     };
   },
   mounted() {
+<<<<<<< HEAD
     this.loading=true;
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
     var that = this;
     this.$axios
       .get("/BasicInformationManagement/GetPSs")
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           that.tableData.push(response.data[i]);
+<<<<<<< HEAD
           that.loading=false;
+=======
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
         }
       })
       .catch(function (error) {

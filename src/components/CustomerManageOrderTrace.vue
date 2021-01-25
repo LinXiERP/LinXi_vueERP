@@ -1,11 +1,15 @@
 <template>
   <div id="CustomerManageOrder">
+<<<<<<< HEAD
     <el-form
       ref="Customer"
       :model="searchOrderTraceItem"
       label-width="120px"
       size="medium"
     >
+=======
+    <el-form ref="Customer" :model="searchOrderTraceItem" label-width="120px" size="medium">
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
       <el-form-item label="请输入订单编号">
         <el-select
           v-model="searchOrderTraceItem.id"
@@ -32,6 +36,7 @@
       <el-col :span="12">
         <div>
           <el-card class="box-card">
+<<<<<<< HEAD
             <div
               slot="header"
               class="clearfix"
@@ -41,6 +46,11 @@
                 style="float: right; padding: 3px 0"
                 type="text"
               ></el-button>
+=======
+            <div slot="header" class="clearfix">
+              <span>订单信息</span>
+              <el-button style="float: right; padding: 3px 0" type="text"></el-button>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
             </div>
             <div v-if="orderItem!=null">
               <el-row>
@@ -51,25 +61,41 @@
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">交货日期</el-tag>
+=======
+                  <el-tag  effect="plain">交货日期</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{orderItem.deliveryDate}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">订单数量</el-tag>
+=======
+                  <el-tag  effect="plain">订单数量</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{orderItem.nums}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">订单金额</el-tag>
+=======
+                  <el-tag  effect="plain">订单金额</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{orderItem.price}}元</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">订单日期</el-tag>
+=======
+                  <el-tag  effect="plain">订单日期</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{orderItem.orderDate}}</el-col>
               </el-row>
@@ -81,6 +107,7 @@
       <el-col :span="12">
         <div>
           <el-card class="box-card">
+<<<<<<< HEAD
             <div
               slot="header"
               class="clearfix"
@@ -90,35 +117,60 @@
                 style="float: right; padding: 3px 0"
                 type="text"
               ></el-button>
+=======
+            <div slot="header" class="clearfix">
+              <span>销售信息</span>
+              <el-button style="float: right; padding: 3px 0" type="text"></el-button>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
             </div>
             <div v-if="saleItem!=null">
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">销售编号</el-tag>
+=======
+                  <el-tag  effect="plain">销售编号</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{saleItem.no}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">销售客户</el-tag>
+=======
+                  <el-tag  effect="plain">销售客户</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{saleItem.productId}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">销售数量</el-tag>
+=======
+                  <el-tag  effect="plain">销售数量</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{saleItem.nums}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">销售金额</el-tag>
+=======
+                  <el-tag  effect="plain">销售金额</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{saleItem.amount}}元</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">销售日期</el-tag>
+=======
+                  <el-tag  effect="plain">销售日期</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{saleItem.saleDate}}</el-col>
               </el-row>
@@ -132,6 +184,7 @@
       <el-col :span="12">
         <div>
           <el-card class="box-card">
+<<<<<<< HEAD
             <div
               slot="header"
               class="clearfix"
@@ -141,36 +194,61 @@
                 style="float: right; padding: 3px 0"
                 type="text"
               ></el-button>
+=======
+            <div slot="header" class="clearfix">
+              <span>结款信息</span>
+              <el-button style="float: right; padding: 3px 0" type="text"></el-button>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
             </div>
             <div v-if="balanceDueItem!=null">
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">经手人</el-tag>
+=======
+                  <el-tag  effect="plain">经手人</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{balanceDueItem.handleName}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">结款方式</el-tag>
+=======
+                  <el-tag  effect="plain">结款方式</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{balanceDueItem.deliveryWay}}</el-col>
               </el-row>
 
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">下单时间</el-tag>
+=======
+                  <el-tag  effect="plain">下单时间</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{balanceDueItem.orderDate}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">结款金额</el-tag>
+=======
+                  <el-tag  effect="plain">结款金额</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{balanceDueItem.price}}元</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">结款日期</el-tag>
+=======
+                  <el-tag  effect="plain">结款日期</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{balanceDueItem.operatorTime}}</el-col>
               </el-row>
@@ -182,6 +260,7 @@
       <el-col :span="12">
         <div>
           <el-card class="box-card">
+<<<<<<< HEAD
             <div
               slot="header"
               class="clearfix"
@@ -196,23 +275,42 @@
               <el-row>
                 <el-col :span="5">
                   <el-tag effect="plain">产地</el-tag>
+=======
+            <div slot="header" class="clearfix">
+              <span>产品信息</span>
+              <el-button style="float: right; padding: 3px 0" type="text"></el-button>
+            </div>
+            <div v-if="productItem!=null">
+                <el-row>
+                <el-col :span="5">
+                  <el-tag  effect="plain">产地</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{productItem.place}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">生产商</el-tag>
+=======
+                  <el-tag  effect="plain">生产商</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{productItem.manufacturer}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">产品名称</el-tag>
+=======
+                  <el-tag  effect="plain">产品名称</el-tag>
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
                 </el-col>
                 <el-col :span="12">{{productItem.name}}</el-col>
               </el-row>
               <el-row>
                 <el-col :span="5">
+<<<<<<< HEAD
                   <el-tag effect="plain">产品规格</el-tag>
                 </el-col>
                 <el-col :span="12">{{productItem.spec}}</el-col>
@@ -225,6 +323,20 @@
                 <el-col :span="12">{{productItem.price}}元</el-col>
               </el-row>
 
+=======
+                  <el-tag  effect="plain">产品规格</el-tag>
+                </el-col>
+                <el-col :span="12">{{productItem.spec}}</el-col>
+              </el-row>
+              
+              <el-row>
+                <el-col :span="5">
+                  <el-tag  effect="plain">产品单价</el-tag>
+                </el-col>
+                <el-col :span="12">{{productItem.price}}元</el-col>
+              </el-row>
+            
+>>>>>>> c6dff6bf87a5d2d759e0dd318189b7d5083d7c25
             </div>
           </el-card>
         </div>
